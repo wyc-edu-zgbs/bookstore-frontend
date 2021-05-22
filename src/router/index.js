@@ -21,12 +21,17 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Search.vue')
+    component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
+  },
+  {
+    path: '/book/:id',
+    name: 'Book',
+    component: () => import(/* webpackChunkName: "book" */ '../views/Book.vue')
   },
   {
     path: '/debug',
     name: 'Debug',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Debug.vue')
+    component: () => import(/* webpackChunkName: "debug" */ '../views/Debug.vue')
   }
 ]
 
