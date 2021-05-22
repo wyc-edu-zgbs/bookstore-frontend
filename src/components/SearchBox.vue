@@ -1,22 +1,40 @@
 <template>
-	<div class="search-box">
-		<el-row>
-			<el-col span="18"><el-input placeholder="Search" v-model="query" /></el-col>
-			<el-col span="6"><el-button type="primary" icon="el-icon-search">Search</el-button></el-col>
-		</el-row>
-	</div>
+	<el-form :inline="true" @submit.native.prevent="goSearch()">
+		<el-form-item>
+			<el-input placeholder="Search" v-model="query" />
+		</el-form-item>
+		<el-form-item>
+			<el-button
+				type="primary"
+				icon="el-icon-search"
+				@click="goSearch()"
+				:disabled="query.length == 0">
+				Search
+			</el-button>
+		</el-form-item>
+	</el-form>
 </template>
 
 <script>
 export default {
 	data() {
 		return {
-			query: ''
+			query: this.text
+		}
+	},
+	props: {
+		text: {
+			type: String,
+			default: ""
 		}
 	},
 	methods: {
-		goDetail(id){
-			this.$router.replace('/goods/' + id);
+		goSearch() {
+			if (this.query.length) {
+				this.$router
+					.push({path: "/search", query: {q: this.query}})
+					.catch(()=>{})
+			}
 		},
 	}
 }
