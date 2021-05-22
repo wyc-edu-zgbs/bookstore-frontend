@@ -39,3 +39,9 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+.el-form {
+	text-align: center
+}
+</style>

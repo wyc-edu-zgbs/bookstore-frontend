@@ -95,4 +95,7 @@ export default {
 </script>
 
 <style scoped>
+.el-pagination {
+	text-align: center
+}
 </style>
