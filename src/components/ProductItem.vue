@@ -1,7 +1,7 @@
 <template>
 	<router-link :to="'/book/' + product.id">
 		<el-card class="product" shadow="hover">
-			<el-image :src="product.cover" fit="scale" class="pro_img" lazy />
+			<el-image :src="'/api/media/'+product.cover" fit="scale" class="pro_img" lazy />
 			<p class="title">{{product.name}}</p>
 			<p class="author">{{product.author}}</p>
 			<p class="price">{{product.price}}</p>

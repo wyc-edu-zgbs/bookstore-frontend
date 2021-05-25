@@ -1,8 +1,8 @@
 <template>
-	<div class="book-container" :key="key">
+	<div class="book-container" :key="key" v-if="key">
 		<el-row type="flex" justify="space-around">
 			<el-col :span="6">
-				<el-image :src="book.cover" lazy>
+				<el-image :src="'/api/media/'+book.cover" lazy>
 				</el-image>
 			</el-col>
 			<el-col :span="6">
