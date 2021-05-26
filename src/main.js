@@ -11,6 +11,8 @@ Vue.config.productionTip = false
 import AxiosPlugin from './utils/AxiosPlugin.js'
 Vue.use(AxiosPlugin)
 
+import './utils/filter.js'
+
 new Vue({
   router,
   store,
