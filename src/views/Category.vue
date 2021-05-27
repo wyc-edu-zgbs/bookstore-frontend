@@ -2,11 +2,11 @@
 	<div class="category-container" :key="$route.query.cat || ''">
 		<SearchBox />
 		<el-breadcrumb separator="/">
-			<el-breadcrumb-item :to="{path: '/', query: {cat: ''}}">homepage</el-breadcrumb-item>
+			<el-breadcrumb-item :to="{query: {cat: ''}}">homepage</el-breadcrumb-item>
 			<el-breadcrumb-item 
 				v-for="i in p.map((v, i) => ({i:i, v:v}))"
 				:key="i.v"
-				:to="{query: {cat: p.splice(0, i.i+1).join(',')}}">
+				:to="{query: {cat: p.slice(0, i.i+1).join(',')}}">
 				{{i.v}}
 			</el-breadcrumb-item>
 		</el-breadcrumb>
@@ -23,9 +23,6 @@ export default {
 		p() {
 			return this.$route.query.cat.split(",")
 		}
-	},
-	mounted() {
-		console.log(this.p)
 	},
 	components: {
 		ItemsView,
