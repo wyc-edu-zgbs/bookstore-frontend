@@ -19,13 +19,7 @@
 export default {
 	data() {
 		return {
-			query: this.text
-		}
-	},
-	props: {
-		text: {
-			type: String,
-			default: ""
+			query: this.$route.path == '/search' ? this.$route.query.q : ""
 		}
 	},
 	methods: {
