@@ -21,7 +21,7 @@ import SearchBox from '../components/SearchBox.vue'
 export default {
 	computed: {
 		p() {
-			return this.$route.query.cat.split(",")
+			return (this.$route.query.cat || "").split(",")
 		}
 	},
 	components: {
