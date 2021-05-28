@@ -1,21 +1,26 @@
 <template>
   <div id="app">
-    <Header/>
-    <router-view/>
+    <el-col
+      :span="18"
+      :offset="3"
+    >
+      <div id="nav">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/cart">Cart</router-link> |
+        <router-link to="/login">Greeter</router-link> |
+        <router-link to="/book/:id">Book</router-link> |
+        <router-link to="/search">Search</router-link>
+      </div>
+      <router-view />
+    </el-col>
   </div>
 </template>
 
-<script>
-import Header from './components/Header.vue'
-
-export default {
-  components: {
-    Header
-  }
+<style>
+body {
+  background-color: #eaece1;
 }
-</script>
 
-<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
