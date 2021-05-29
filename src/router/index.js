@@ -47,6 +47,22 @@ const routes = [
     path: '/debug',
     name: 'Debug',
     component: () => import(/* webpackChunkName: "debug" */ '../views/Debug.vue')
+  },
+  {
+    path:'/personinfo',
+    name:'PersonInfo',
+    component: ()=> import (/*webpackChunkName:"personinfo"*/'../views/PersonalInfo/PersonInfo.vue'),
+    children:
+    [
+      {
+        path:'profile',
+        component: ()=> import('../views/PersonalInfo/Children/Profile.vue')
+      },
+      {
+        path:'edit',
+        component: ()=> import('../views/PersonalInfo/Children/Edit.vue')
+      }
+    ]
   }
 ]
 
