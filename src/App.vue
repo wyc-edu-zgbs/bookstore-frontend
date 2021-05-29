@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header/>
     <el-col
       :span="18"
       :offset="3"
@@ -16,7 +17,17 @@
   </div>
 </template>
 
-<style>
+<script>
+import Header from './components/Header.vue'
+
+export default {
+  components: {
+    Header
+  }
+}
+</script>
+
+<style scoped>
 body {
   background-color: #eaece1;
 }
