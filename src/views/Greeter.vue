@@ -190,7 +190,7 @@ export default {
   width: 45%;
   margin: auto;
   padding: 0 7% 0 0;
-  background: rgba(96, 131, 92, 0.5);
+  background-color: rgb(248, 224, 157, 0.4);
 }
 .logo {
   position: relative;
@@ -198,9 +198,6 @@ export default {
 }
 .img {
   width: 70%;
-}
-.text-grey {
-  color: rgb(255, 247, 234);
 }
 .el-form-item {
   padding: 1%;
@@ -213,13 +210,10 @@ export default {
 
 <style>
 .el-form-item__label {
-  color: white;
+  color: rgb(58, 130, 119);
 }
-.el-form-item__error {
-  color: white;
-  font-size: 100%;
-}
+/*
 .el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label:before {
   color: white;
-}
+} */
 </style>

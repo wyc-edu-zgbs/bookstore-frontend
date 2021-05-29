@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     <el-col
       :span="18"
       :offset="3"
@@ -15,6 +16,16 @@
     </el-col>
   </div>
 </template>
+
+<script>
+import Header from './components/Header.vue'
+
+export default {
+  components: {
+    Header
+  }
+}
+</script>
 
 <style>
 body {
