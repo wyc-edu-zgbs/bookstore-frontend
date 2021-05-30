@@ -190,7 +190,7 @@ export default {
   width: 45%;
   margin: auto;
   padding: 0 7% 0 0;
-  background-color: rgb(248, 224, 157, 0.4);
+  background-color: rgba(248, 224, 157, 0.4);
 }
 .logo {
   position: relative;

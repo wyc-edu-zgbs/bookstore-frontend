@@ -11,10 +11,10 @@
           <a @click="logout">退出登录</a>
         </li>
         <li>
-          <router-link to="/personinfo">个人中心</router-link>
+          <router-link to="/personinfo"><i class="el-icon-user-solid"></i>个人中心</router-link>
         </li>
         <li>
-          <router-link to="/cart">我的购物车</router-link>
+          <router-link to="/cart"><i class="el-icon-shopping-cart-2"></i>我的购物车</router-link>
         </li>
       </ul>
     </div>

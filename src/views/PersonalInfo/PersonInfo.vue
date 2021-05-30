@@ -1,19 +1,12 @@
 <template>
   <el-container style="height: 100%;">
-    <el-aside
-      :width=" '250px'"
-      style="background-color: #EDEEEF;"
-    >
+    <el-aside width="15vw">
       <!--
             <img v-if="userInfo.user_avatar" :src="userInfo.user_avatar" class="navbar-brand-img mx-auto">
             <img v-else src="./images/no_login.jpg" class="navbar-brand-img mx-auto">
             不知道有没有头像 先这么写了-->
 
-      <el-menu
-        :unique-opened="true"
-        :disabled="disabled"
-        style="background-color: rgba(255, 255, 255, 0.7);"
-      >
+      <el-menu :unique-opened="true">
         <el-menu-item
           index="1"
           @click="goTo('/personinfo/profile')"
@@ -40,6 +33,14 @@
           </el-menu-item-group>
         </el-submenu>
 
+        <el-menu-item
+          index="3"
+          @click="goTo('/personinfo/addr')"
+        >
+          <i class="el-icon-location"></i>
+          <span slot="title">收货地址</span>
+        </el-menu-item>
+
       </el-menu>
 
     </el-aside>
@@ -62,4 +63,13 @@ export default
 </script>
 
 <style scoped>
+.el-aside {
+  background-color: rgba(91, 155, 148, 0.3);
+  display: block;
+  height: 60vh;
+  position: relative;
+}
+.el-main {
+  padding: 0 2%;
+}
 </style>

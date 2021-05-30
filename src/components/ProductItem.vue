@@ -68,6 +68,11 @@ a {
   text-decoration: none;
 }
 
+.title {
+  font-size: 110%;
+  font-weight: bold;
+}
+
 .author {
   font-size: 70%;
   margin: -5% 0 5%;
