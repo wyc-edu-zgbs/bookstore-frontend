@@ -10,6 +10,8 @@
         <router-link to="/login">Greeter</router-link> |
         <router-link to="/book/:id">Book</router-link> |
         <router-link to="/search">Search</router-link>
+        |
+        <router-link to="/personInfo/Profile">personInfo</router-link>
       </div>
       <router-view />
     </el-col>
