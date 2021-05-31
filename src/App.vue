@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     <el-col
       :span="18"
       :offset="3"
@@ -18,11 +19,16 @@
   </div>
 </template>
 
-<style>
-body {
-  background-color: #eaece1;
-}
+<script>
+import Header from './components/Header.vue'
 
+export default {
+  components: {
+    Header
+  }
+}
+</script>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,5 +46,11 @@ body {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+</style>
+
+<style>
+body {
+  background-color: #eaece1;
 }
 </style>

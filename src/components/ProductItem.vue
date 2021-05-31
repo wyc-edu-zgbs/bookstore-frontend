@@ -11,8 +11,8 @@
       />
       <p class="title">{{product.name}}</p>
       <p class="author">{{product.author}}</p>
-      <span class="new-price">￥{{(product.price*product.rating).toFixed(1)}}</span>
-      <span class="old-price">定价:￥{{product.price}}</span>
+      <span class="new-price">{{(product.price*product.rating) | formatPrice}}</span>
+      <span class="old-price">定价: {{product.price | formatPrice}}</span>
       <!-- <div class="button"> -->
       <el-row
         type="flex"
@@ -66,6 +66,11 @@ a {
 
 .router-link-active {
   text-decoration: none;
+}
+
+.title {
+  font-size: 110%;
+  font-weight: bold;
 }
 
 .author {
