@@ -122,7 +122,7 @@ export default {
   },
 
   methods: {
-    handleChange(e) {
+    handleChange() {
       const addrNodes = this.$refs['cascaderAddr'].getCheckedNodes()
       this.form.region = (addrNodes[0].pathLabels[1] == "市辖区" || addrNodes[0].pathLabels[1] == "县") ?
         addrNodes[0].pathLabels[0] + addrNodes[0].pathLabels[2] : addrNodes[0].pathLabels.join("")

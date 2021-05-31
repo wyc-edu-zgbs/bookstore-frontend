@@ -61,22 +61,20 @@
             autocomplete="new-password"
           ></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item class="button-container">
           <el-button
             type="primary"
             round
-            class="buttons"
             @click="submitForm()"
           >
-            <span v-if="this.register">注 册</span>
-            <span v-else>登 录</span>
+            <span v-if="this.register">注册</span>
+            <span v-else>登录</span>
           </el-button>
           <el-button
             @click="resetForm()"
             type="primary"
             round
-            style="width:30%"
-          >重 置</el-button>
+          >重置</el-button>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -135,7 +133,7 @@ export default {
       },
       rules: {
         email: [
-          { required: true },
+          { required: true, message: "请输入邮箱" },
           { pattern: /.+@.+/, message: "您输入的邮箱不正确" },
         ],
         pass: [
@@ -202,18 +200,12 @@ export default {
 .el-form-item {
   padding: 1%;
 }
-.buttons {
+.button-container .el-button {
   margin: 0 10% 0 10%;
   width: 30%;
+  min-width: min-content;
 }
-</style>
-
-<style>
 .el-form-item__label {
   color: rgb(58, 130, 119);
 }
-/*
-.el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label:before {
-  color: white;
-} */
 </style>
