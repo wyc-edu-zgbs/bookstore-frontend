@@ -67,6 +67,11 @@ const routes = [
         component: ()=> import('../views/PersonalInfo/Children/Addr.vue')
       }
     ]
+  },
+  {
+    path:'/orderconfirm',
+    name:'OrderConfirm',
+    component:()=> import('../views/OrderConfirm.vue')
   }
 ]
 
