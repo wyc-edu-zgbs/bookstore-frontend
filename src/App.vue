@@ -26,12 +26,7 @@ export default {
   }
 }
 </script>
-
-<style >
-body {
-  background-color: #eaece1;
-}
-
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -49,5 +44,11 @@ body {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+</style>
+
+<style>
+body {
+  background-color: #eaece1;
 }
 </style>
