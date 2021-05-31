@@ -151,17 +151,20 @@ export default {
         if (valid) {
           var data = { email: this.form.email, password: this.form.pass }
           if (this.register) {
-            data.nickname = this.form.nickname
+            data.username = this.form.nickname
           }
           this.$http.post(
-            this.register ? "/api/register" : "/api/login",
+            this.register ? "/api/register/" : "/api/login/",
             data)
-            .then(() => {
+            .then((response) => {
+              if (response.data.detail) {
+                this.$message(response.data.detail)
+              }
               this.$router.push("/")
             })
             .catch(error => {
               this.$alert(
-                error.response.data.reason || error.toString(),
+                error.response.data.detail || error.toString(),
                 'Authentication Error')
             })
         } else {
