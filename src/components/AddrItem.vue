@@ -23,22 +23,27 @@
     <p class="text-wrapper"><i class="el-icon-phone"></i> {{form.tel}}</p>
     <p class="text-wrapper"><i class="el-icon-location"></i> {{form.region+form.detail}}</p>
 
-    <el-divider></el-divider>
+    <span v-if="editable">
+      <el-divider></el-divider>
 
-    <el-button
-      class="addr-button"
-      type="text"
-      size="small"
-    ><i class="el-icon-remove-outline"></i> 删除</el-button>
+      <el-button
+        class="addr-button"
+        type="text"
+        size="small"
+      ><i class="el-icon-remove-outline"></i> 删除</el-button>
+      
+      <el-button
+        type="text"
+        class="addr-button"
+        @click="dialogFormVisible = true"
+        size="small"
+      ><i class="el-icon-edit"></i> 修改</el-button>
+    </span>
 
-    <el-button
-      type="text"
-      class="addr-button"
-      @click="dialogFormVisible = true"
-      size="small"
-    ><i class="el-icon-edit"></i> 修改</el-button>
-
-    <AddrDialog></AddrDialog>
+    <AddrDialog
+      :visible.sync="dialogFormVisible"
+      v-model="form"
+      ></AddrDialog>
 
   </el-card>
 </template>
@@ -66,6 +71,12 @@ export default {
         value: 'code'
       },
       dialogFormVisible: false
+    }
+  },
+
+  props: {
+    editable: {
+      default: true
     }
   },
 

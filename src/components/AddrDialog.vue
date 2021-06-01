@@ -1,7 +1,8 @@
 <template>
   <el-dialog
     title="收货地址"
-    :visible.sync="dialogFormVisible"
+    :visible="visible"
+    @update:visible="cancel_dialog"
     width="30%"
     center
   >
@@ -12,6 +13,7 @@
     >
       <el-form-item label="收货人：">
         <el-input
+          v-model="form.name"
           autocomplete="off"
           style="width:70%"
         ></el-input>
@@ -45,11 +47,13 @@
       slot="footer"
       class="dialog-footer"
     >
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button @click="cancel_dialog">取消</el-button>
       <el-button
         type="primary"
-        @click="dialogFormVisible = false"
-      >确 定</el-button>
+        @click="close_dialog(); $emit('updateform', deepcopy(form))"
+        >
+      确定
+      </el-button>
     </div>
   </el-dialog>
 </template>
@@ -60,30 +64,43 @@ const pca = require('../assets/pca.json')
 export default {
   data() {
     return {
-      form: {
-        name: '',
-        region: '',
-        detail: "",
-        tel: "",
-        adpca: [],
-        isDef: false,
-      },
       pcaOptions: pca,
       addressProps: {
         label: 'name',
         children: 'children',
         value: 'code'
       },
-      dialogFormVisible: false
+      dialogFormVisible: this.visible,
+      form: this.deepcopy(this.orig_form)
     }
   },
-
+  model: {
+    prop: "orig_form",
+    event: "updateform"
+  },
+  props: {
+    orig_form: {
+    },
+    visible: {
+      default: false
+    }
+  },
   methods: {
+    close_dialog() {
+      this.$emit("update:visible", false)
+    },
+    cancel_dialog() {
+      this.form = this.deepcopy(this.orig_form)
+      this.close_dialog()
+    },
     handleChange() {
       const addrNodes = this.$refs['cascaderAddr'].getCheckedNodes()
       this.form.region = (addrNodes[0].pathLabels[1] == "市辖区" || addrNodes[0].pathLabels[1] == "县") ?
         addrNodes[0].pathLabels[0] + addrNodes[0].pathLabels[2] : addrNodes[0].pathLabels.join("")
     },
+    deepcopy(x) {
+      return JSON.parse(JSON.stringify(x))
+    }
   },
 }
 </script>
