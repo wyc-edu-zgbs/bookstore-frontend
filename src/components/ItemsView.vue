@@ -151,7 +151,7 @@ export default {
   text-align: center;
 }
 .result {
-  padding: 2% 3%;
+  padding: 2% 0;
   background: rgba(255, 255, 255, 0.5);
 }
 </style>

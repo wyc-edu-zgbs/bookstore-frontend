@@ -47,17 +47,17 @@ export default {
 <style scoped>
 .product {
   text-align: left;
-  width: 90%;
-  height: 70%;
-  background: rgba(255, 255, 255, 0.7);
-  margin: 3%;
+  width: 85%;
+  height: 75%;
+  margin: 2% 4%;
+  padding-left: 1vw;
 }
 
 .el-image {
   position: relative;
-  width: 100%;
-  height: 7cm;
-  margin: 0 0 -5%;
+  width: 90%;
+  height: 33vh;
+  margin: 0 0 -2vh 0;
 }
 
 a {
@@ -100,3 +100,4 @@ a {
   padding: 4% 3%;
 }
 </style>
+

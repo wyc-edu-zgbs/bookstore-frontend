@@ -139,7 +139,6 @@ export default {
 <style scoped>
 .book-container {
   padding: 3%;
-  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .book-img {

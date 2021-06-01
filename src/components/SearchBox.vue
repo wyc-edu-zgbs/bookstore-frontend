@@ -13,16 +13,20 @@
 
       <el-col
         :span="9"
-        :offset="7"
+        :offset="6"
       >
         <el-form-item>
           <el-input
-            placeholder="Search"
+            placeholder="在此输入"
             v-model="query"
+            class="it"
           />
         </el-form-item>
       </el-col>
-      <el-col :span="3">
+      <el-col
+        :span="3"
+        :offset="3"
+      >
         <el-form-item>
           <el-button
             type="primary"
@@ -30,7 +34,7 @@
             @click="goSearch()"
             :disabled="query.length == 0"
           >
-            Search
+            搜索
           </el-button>
         </el-form-item>
       </el-col>
@@ -76,4 +80,20 @@ export default {
 .img {
   margin-top: -20%;
 }
+.el-button {
+  height: 45px;
+}
+
+.it >>> .el-input__inner {
+  height: 45px;
+  width: 136%;
+  border-color: rgb(58, 130, 119);
+  border-width: 2px;
+  font-size: 18px;
+}
+.it >>> .el-input__inner:hover {
+  border-color: rgb(58, 130, 119);
+}
 </style>
+
+
