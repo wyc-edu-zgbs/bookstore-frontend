@@ -24,6 +24,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "greeter" */ '../views/Greeter.vue')
   },
   {
+    path: '/category',
+    name: 'Category',
+    component: () => import(/* webpackChunkName: "category" */ '../views/Category.vue')
+  },
+  {
     path: '/search',
     name: 'Search',
     component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
@@ -34,9 +39,34 @@ const routes = [
     component: () => import(/* webpackChunkName: "book" */ '../views/Book.vue')
   },
   {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import(/* webpackChunkName: "cart" */ '../views/Cart.vue')
+  },
+  {
     path: '/debug',
     name: 'Debug',
     component: () => import(/* webpackChunkName: "debug" */ '../views/Debug.vue')
+  },
+  {
+    path:'/personinfo',
+    name:'PersonInfo',
+    component: ()=> import (/*webpackChunkName:"personinfo"*/'../views/PersonalInfo/PersonInfo.vue'),
+    children:
+    [
+      {
+        path:'profile',
+        component: ()=> import('../views/PersonalInfo/Children/Profile.vue')
+      },
+      {
+        path:'edit',
+        component: ()=> import('../views/PersonalInfo/Children/Edit.vue')
+      },
+      {
+        path:'addr',
+        component: ()=> import('../views/PersonalInfo/Children/Addr.vue')
+      }
+    ]
   }
 ]
 
