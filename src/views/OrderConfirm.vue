@@ -11,7 +11,7 @@
             </span>
         </el-header>
         <el-main>
-                  <AddrItem></AddrItem>
+                  <AddrItem :editable="false"></AddrItem>
 
         </el-main>
 
