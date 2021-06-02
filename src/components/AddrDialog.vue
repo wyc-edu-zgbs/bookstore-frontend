@@ -2,30 +2,33 @@
   <el-dialog
     title="收货地址"
     :visible="visible"
-    @update:visible="cancel_dialog"
+    @update:visible="close_dialog()"
     width="30%"
     center
   >
     <el-form
       :model="form"
+      :rules="rules"
+      ref="form"
+      status-icon
       label-width="25%"
       label-position="right"
     >
-      <el-form-item label="收货人：">
+      <el-form-item label="收货人：" prop="name">
         <el-input
           v-model="form.name"
           autocomplete="off"
           style="width:70%"
         ></el-input>
       </el-form-item>
-      <el-form-item label="电话：">
+      <el-form-item label="电话：" prop="tel">
         <el-input
           v-model="form.tel"
           autocomplete="off"
           style="width:70%"
         ></el-input>
       </el-form-item>
-      <el-form-item label="地址：">
+      <el-form-item label="地址：" prop="adpca">
         <el-cascader
           v-model="form.adpca"
           :options="pcaOptions"
@@ -35,7 +38,7 @@
           placeholder="请选择地址"
         ></el-cascader>
       </el-form-item>
-      <el-form-item label="详细地址：">
+      <el-form-item label="详细地址：" prop="detail">
         <el-input
           v-model="form.detail"
           autocomplete="off"
@@ -47,10 +50,10 @@
       slot="footer"
       class="dialog-footer"
     >
-      <el-button @click="cancel_dialog">取消</el-button>
+      <el-button @click="close_dialog">取消</el-button>
       <el-button
         type="primary"
-        @click="close_dialog(); $emit('updateform', deepcopy(form))"
+        @click="updateaddr"
         >
       确定
       </el-button>
@@ -71,27 +74,47 @@ export default {
         value: 'code'
       },
       dialogFormVisible: this.visible,
-      form: this.deepcopy(this.orig_form)
+      form: this.deepcopy(this.addr),
+      rules: {
+        name: [
+          { required: true, message: "blabla required" },
+        ],
+        tel: [
+          { required: true, message: "blabla required" },
+        ],
+        adpca: [
+          { required: true, message: "blabla required" },
+        ],
+        detail: [
+          { required: true, message: "blabla required" },
+        ]
+      }
     }
   },
-  model: {
-    prop: "orig_form",
-    event: "updateform"
-  },
   props: {
-    orig_form: {
+    addr: {
     },
     visible: {
       default: false
     }
   },
+  watch: {
+  },
   methods: {
-    close_dialog() {
-      this.$emit("update:visible", false)
+    updateaddr() {
+      console.log("update")
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          this.$emit('updateaddr', this.form)
+        } else {
+          this.$message("invalid input")
+          return false
+        }
+      })
     },
-    cancel_dialog() {
-      this.form = this.deepcopy(this.orig_form)
-      this.close_dialog()
+    close_dialog() {
+      this.form = this.deepcopy(this.addr)
+      this.$emit("update:visible", false)
     },
     handleChange() {
       const addrNodes = this.$refs['cascaderAddr'].getCheckedNodes()
