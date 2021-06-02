@@ -1,7 +1,7 @@
 <template>
   <div class="item-container">
     <el-radio-group v-model="sort_key" @change="selectSort">
-      <el-radio-button label="sort_default"></el-radio-button>
+      <el-radio-button label="sort_default">default</el-radio-button>
       <el-radio-button label="price_desc"></el-radio-button>
       <el-radio-button label="price_asc"></el-radio-button>
       <el-radio-button label="rating_desc"></el-radio-button>
