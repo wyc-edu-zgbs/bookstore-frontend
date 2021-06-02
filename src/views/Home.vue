@@ -3,19 +3,20 @@
     <SearchBox />
     <el-row>
       <el-col :span="4">
-        <HomeCate></HomeCate>
+        <HomeCate />
       </el-col>
       <el-col :span="15">
         <div class="main">
-          <HomeCarousel></HomeCarousel>
+          <HomeCarousel />
         </div>
       </el-col>
       <el-col :span="5">
         <Notice />
+        <Authors />
       </el-col>
     </el-row>
     <el-row>
-      <Remend></Remend>
+      <Remend />
     </el-row>
   </div>
 </template>
@@ -27,6 +28,7 @@ import HomeCarousel from './home/HomeCarousel.vue'
 import HomeCate from './home/HomeCate.vue'
 import Remend from './home/Remend.vue'
 import Notice from './home/Notice.vue'
+import Authors from './home/Authors.vue'
 
 export default {
   name: 'Home',
@@ -35,7 +37,8 @@ export default {
     HomeCarousel,
     HomeCate,
     Remend,
-    Notice
+    Notice,
+    Authors
   }
 }
 </script>

@@ -48,7 +48,7 @@ export default {
 }
 #divi {
   background: rgb(58, 130, 119);
-  margin: 4.5vh 0;
+  margin: 4vh 0;
 }
 </style>
 

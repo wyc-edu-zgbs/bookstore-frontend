@@ -9,11 +9,24 @@
       >
         新增收货地址
       </el-button>
-      <span id="stitle">最多可创建9个收货地址</span>
     </el-header>
 
     <el-main>
-      <AddrItem></AddrItem>
+      <el-row>
+        <el-col :span="8">
+          <AddrItem />
+        </el-col>
+        <el-col :span="8">
+          <AddrItem />
+        </el-col>
+        <el-col :span="8">
+          <AddrItem />
+        </el-col>
+        <el-col :span="8">
+          <AddrItem />
+        </el-col>
+      </el-row>
+
     </el-main>
   </div>
 </template>
@@ -41,14 +54,11 @@ export default {
 
 .el-main {
   background-color: white;
+  padding: 1%;
 }
 #title {
   font-weight: bold;
   font-size: 130%;
   color: rgb(58, 130, 119);
-}
-#stitle {
-  color: rgb(8, 46, 25);
-  padding: 0 3%;
 }
 </style>

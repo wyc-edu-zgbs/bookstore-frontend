@@ -31,7 +31,7 @@
 
         <div class="book-publish">
           <p>作者：<span class="book-search">{{book.author}}</span></p>
-          <p>出版社：<span class="book-search">{{book.press}}</span> &nbsp;&nbsp; 出版时间：{{book.date}}</p>
+          <p>出版社：<span class="book-search">{{book.press}}</span> <span style="margin-right:24px;" /> 出版时间：{{book.date}}</p>
           <p> ISBN：{{book.isbn}}</p>
         </div>
 
@@ -68,7 +68,13 @@
 
     <el-tabs class="book-card">
       <el-tab-pane label="图书详情">
-        <p> 图书简介：{{book.description}}</p>
+        <span class="dep">开 本：16开 </span>
+        <span class="dep">纸 张：胶版纸</span>
+        <span class="dep"> 包 装：平装-胶订</span>
+        <p>
+          <el-tag plain><i class="el-icon-reading"></i> 图书简介</el-tag>
+        </p>
+        <p>{{book.description}}</p>
       </el-tab-pane>
       <el-tab-pane label="图书评论">
         <p>
@@ -205,5 +211,9 @@ export default {
 
 .book-card {
   padding: 5%;
+}
+.dep {
+  font-size: 80%;
+  padding-right: 8vw;
 }
 </style>

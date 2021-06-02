@@ -36,7 +36,7 @@ export default {
   border-radius: 5%;
   border-width: 0.25vw;
   border-color: rgba(58, 130, 119, 0.7);
-  margin: 0 0 0 2%;
+  margin: 0 4%;
 }
 .head {
   font-size: 1.2vw;

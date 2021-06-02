@@ -32,7 +32,7 @@ export default {
 
 <style scoped>
 .foot {
-  margin: 5% 0;
+  margin: 10% 0 5%;
 }
 #images {
   padding: 1% 0 1% 20%;
