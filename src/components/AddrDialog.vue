@@ -8,24 +8,27 @@
   >
     <el-form
       :model="form"
+      :rules="rules"
+      ref="form"
+      status-icon
       label-width="25%"
       label-position="right"
     >
-      <el-form-item label="收货人：">
+      <el-form-item label="收货人：" prop="name">
         <el-input
           v-model="form.name"
           autocomplete="off"
           style="width:70%"
         ></el-input>
       </el-form-item>
-      <el-form-item label="电话：">
+      <el-form-item label="电话：" prop="tel">
         <el-input
           v-model="form.tel"
           autocomplete="off"
           style="width:70%"
         ></el-input>
       </el-form-item>
-      <el-form-item label="地址：">
+      <el-form-item label="地址：" prop="adpca">
         <el-cascader
           v-model="form.adpca"
           :options="pcaOptions"
@@ -35,7 +38,7 @@
           placeholder="请选择地址"
         ></el-cascader>
       </el-form-item>
-      <el-form-item label="详细地址：">
+      <el-form-item label="详细地址：" prop="detail">
         <el-input
           v-model="form.detail"
           autocomplete="off"
@@ -50,7 +53,7 @@
       <el-button @click="close_dialog">取消</el-button>
       <el-button
         type="primary"
-        @click="$emit('updateaddr', form); close_dialog()"
+        @click="updateaddr"
         >
       确定
       </el-button>
@@ -71,7 +74,21 @@ export default {
         value: 'code'
       },
       dialogFormVisible: this.visible,
-      form: this.deepcopy(this.addr)
+      form: this.deepcopy(this.addr),
+      rules: {
+        name: [
+          { required: true, message: "blabla required" },
+        ],
+        tel: [
+          { required: true, message: "blabla required" },
+        ],
+        adpca: [
+          { required: true, message: "blabla required" },
+        ],
+        detail: [
+          { required: true, message: "blabla required" },
+        ]
+      }
     }
   },
   props: {
@@ -84,6 +101,17 @@ export default {
   watch: {
   },
   methods: {
+    updateaddr() {
+      console.log("update")
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          this.$emit('updateaddr', this.form)
+        } else {
+          this.$message("invalid input")
+          return false
+        }
+      })
+    },
     close_dialog() {
       this.form = this.deepcopy(this.addr)
       this.$emit("update:visible", false)
