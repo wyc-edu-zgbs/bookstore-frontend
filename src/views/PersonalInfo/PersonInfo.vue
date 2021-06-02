@@ -1,6 +1,6 @@
 <template>
   <el-container style="height: 100%;">
-    <el-aside >
+    <el-aside width="15vw">
       <!--
             <img v-if="userInfo.user_avatar" :src="userInfo.user_avatar" class="navbar-brand-img mx-auto">
             <img v-else src="./images/no_login.jpg" class="navbar-brand-img mx-auto">

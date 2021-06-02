@@ -2,7 +2,7 @@
     <el-container style="height: 100%; width: 100%; border: 0px">
         <el-header style="text-align: left; font-size: 20px; display: flex; justify-content: space-between;">
             <span style="color: black;font-size: 30px">所有商品</span>
-            <el-button class="emptytrash" type="success" @click.native="emptyTrash">
+            <el-button class="emptytrash" type="success" @click.native="goTo('/admin/goodsadd')">
                 <i class="el-icon-plus"></i><span>添加商品</span>
             </el-button>
 <!--          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">-->
@@ -121,6 +121,9 @@ export default {
             this.submitdel();
         });
     },
+     goTo(path) {
+        this.$router.replace(path);
+      }
   }
 
 }
