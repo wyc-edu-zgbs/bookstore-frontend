@@ -1,29 +1,34 @@
 <template>
   <el-dialog
     title="收货地址"
-    :visible.sync="dialogFormVisible"
+    :visible="visible"
+    @update:visible="close_dialog()"
     width="30%"
     center
   >
     <el-form
       :model="form"
+      :rules="rules"
+      ref="form"
+      status-icon
       label-width="25%"
       label-position="right"
     >
-      <el-form-item label="收货人：">
+      <el-form-item label="收货人：" prop="name">
         <el-input
+          v-model="form.name"
           autocomplete="off"
           style="width:70%"
         ></el-input>
       </el-form-item>
-      <el-form-item label="电话：">
+      <el-form-item label="电话：" prop="tel">
         <el-input
           v-model="form.tel"
           autocomplete="off"
           style="width:70%"
         ></el-input>
       </el-form-item>
-      <el-form-item label="地址：">
+      <el-form-item label="地址：" prop="adpca">
         <el-cascader
           v-model="form.adpca"
           :options="pcaOptions"
@@ -33,7 +38,7 @@
           placeholder="请选择地址"
         ></el-cascader>
       </el-form-item>
-      <el-form-item label="详细地址：">
+      <el-form-item label="详细地址：" prop="detail">
         <el-input
           v-model="form.detail"
           autocomplete="off"
@@ -45,11 +50,13 @@
       slot="footer"
       class="dialog-footer"
     >
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button @click="close_dialog">取消</el-button>
       <el-button
         type="primary"
-        @click="dialogFormVisible = false"
-      >确 定</el-button>
+        @click="updateaddr"
+        >
+      确定
+      </el-button>
     </div>
   </el-dialog>
 </template>
@@ -60,30 +67,63 @@ const pca = require('../assets/pca.json')
 export default {
   data() {
     return {
-      form: {
-        name: '',
-        region: '',
-        detail: "",
-        tel: "",
-        adpca: [],
-        isDef: false,
-      },
       pcaOptions: pca,
       addressProps: {
         label: 'name',
         children: 'children',
         value: 'code'
       },
-      dialogFormVisible: false
+      dialogFormVisible: this.visible,
+      form: this.deepcopy(this.addr),
+      rules: {
+        name: [
+          { required: true, message: "blabla required" },
+        ],
+        tel: [
+          { required: true, message: "blabla required" },
+        ],
+        adpca: [
+          { required: true, message: "blabla required" },
+        ],
+        detail: [
+          { required: true, message: "blabla required" },
+        ]
+      }
     }
   },
-
+  props: {
+    addr: {
+    },
+    visible: {
+      default: false
+    }
+  },
+  watch: {
+  },
   methods: {
+    updateaddr() {
+      console.log("update")
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          this.$emit('updateaddr', this.form)
+        } else {
+          this.$message("invalid input")
+          return false
+        }
+      })
+    },
+    close_dialog() {
+      this.form = this.deepcopy(this.addr)
+      this.$emit("update:visible", false)
+    },
     handleChange() {
       const addrNodes = this.$refs['cascaderAddr'].getCheckedNodes()
       this.form.region = (addrNodes[0].pathLabels[1] == "市辖区" || addrNodes[0].pathLabels[1] == "县") ?
         addrNodes[0].pathLabels[0] + addrNodes[0].pathLabels[2] : addrNodes[0].pathLabels.join("")
     },
+    deepcopy(x) {
+      return JSON.parse(JSON.stringify(x))
+    }
   },
 }
 </script>

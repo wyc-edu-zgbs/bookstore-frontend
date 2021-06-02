@@ -2,6 +2,7 @@
   <el-card
     class="addr-card"
     shadow="hover"
+    v-loading="is_loading"
   >
     <div class="addr-header">
       <i class="el-icon-user-solid"></i>
@@ -23,22 +24,28 @@
     <p class="text-wrapper"><i class="el-icon-phone"></i> {{form.tel}}</p>
     <p class="text-wrapper"><i class="el-icon-location"></i> {{form.region+form.detail}}</p>
 
-    <el-divider></el-divider>
+    <span v-if="editable">
+      <el-divider></el-divider>
 
-    <el-button
-      class="addr-button"
-      type="text"
-      size="small"
-    ><i class="el-icon-remove-outline"></i> 删除</el-button>
+      <el-button
+        class="addr-button"
+        type="text"
+        size="small"
+      ><i class="el-icon-remove-outline"></i> 删除</el-button>
+      
+      <el-button
+        type="text"
+        class="addr-button"
+        @click="dialogFormVisible = true"
+        size="small"
+      ><i class="el-icon-edit"></i> 修改</el-button>
+    </span>
 
-    <el-button
-      type="text"
-      class="addr-button"
-      @click="dialogFormVisible = true"
-      size="small"
-    ><i class="el-icon-edit"></i> 修改</el-button>
-
-    <AddrDialog></AddrDialog>
+    <AddrDialog
+      :visible.sync="dialogFormVisible"
+      :addr="form"
+      @updateaddr="updateaddr($event)"
+      ></AddrDialog>
 
   </el-card>
 </template>
@@ -52,6 +59,7 @@ export default {
   data() {
     return {
       form: {
+        id: "028bdac0-c371-11eb-a887-757050c39c90",
         name: '张三',
         region: '北京市海淀区',
         detail: "北京航空航天大学",
@@ -65,7 +73,14 @@ export default {
         children: 'children',
         value: 'code'
       },
-      dialogFormVisible: false
+      dialogFormVisible: false,
+      is_loading: false
+    }
+  },
+
+  props: {
+    editable: {
+      default: true
     }
   },
 
@@ -74,6 +89,11 @@ export default {
   },
 
   methods: {
+    updateaddr(e) {
+      this.is_loading = true
+      console.log(e)
+      setTimeout(this.$router.go, 1)
+    },
   },
 }
 </script>

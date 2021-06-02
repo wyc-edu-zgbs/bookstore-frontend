@@ -1,18 +1,28 @@
 <template>
   <div class="item-container">
+    <el-radio-group v-model="sort_key" @change="selectSort">
+      <el-radio-button label="sort_default">default</el-radio-button>
+      <el-radio-button label="price_desc"></el-radio-button>
+      <el-radio-button label="price_asc"></el-radio-button>
+      <el-radio-button label="rating_desc"></el-radio-button>
+      <el-radio-button label="rating_asc"></el-radio-button>
+    </el-radio-group>
     <div class="result">
-      <el-row
-        v-for="product_row in product_rows"
-        :key="product_row.map(x=>x.id).join()"
-      >
-        <el-col
-          v-for="product in product_row"
-          :key="product.id"
-          :span="24/item_per_rows"
+      <div v-if="product_rows" :key="$route.fullPath">
+        <el-row
+          v-for="product_row in product_rows"
+          :key="product_row.map(x=>x.id).join()"
         >
-          <ProductItem :product="product" />
-        </el-col>
-      </el-row>
+          <el-col
+            v-for="product in product_row"
+            :key="product.id"
+            :span="24/item_per_rows"
+          >
+            <ProductItem :product="product" />
+          </el-col>
+        </el-row>
+      </div>
+      <div v-else>loading...</div>
     </div>
     <el-pagination
       @current-change="gotoPage"
@@ -39,6 +49,7 @@ function chunk(a, n) {
 export default {
   data() {
     return {
+      sort_key: "sort_default",
       item_per_rows: 4,
       totalPages: 1,
       product_rows: [],
@@ -134,6 +145,13 @@ export default {
       for (let i of chunk(resp.contents, this.item_per_rows)) {
         this.product_rows.push(i)
       }
+    },
+    selectSort() {
+      this.$router.push({
+        path: this.$route.path,
+        query: { ...this.$route.query, p: 1, sort: this.sort_key }
+      })
+        .catch(() => { })
     },
     gotoPage(p) {
       this.$router.push({
