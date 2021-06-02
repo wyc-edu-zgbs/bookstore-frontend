@@ -41,6 +41,15 @@
           <span slot="title">收货地址</span>
         </el-menu-item>
 
+                <el-menu-item
+          index="4"
+          @click="goTo('/personinfo/myorder')"
+        >
+          <i class="el-icon-s-order"></i>
+          <span slot="title">我的订单</span>
+        </el-menu-item>
+        
+
       </el-menu>
 
     </el-aside>
