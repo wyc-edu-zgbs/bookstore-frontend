@@ -24,7 +24,7 @@
         </el-menu-item>
 
         <el-menu-item
-          index="4"
+          index="3"
           @click="goTo('/personinfo/myorder')"
         >
           <i class="el-icon-s-order"></i>

@@ -1,98 +1,99 @@
 <template>
-<el-container>
-     <h1>
+  <el-container>
+    <h1>
       <i class="el-icon-s-order"></i>
       订单结算
     </h1>
- <!--   <el-container>-->
-        <el-header>
-            <span>
-            请选择收货地址
-            </span>
-        </el-header>
-        <el-main>
-                  <AddrItem></AddrItem>
+    <!--   <el-container>-->
+    <p>
+      请选择收货地址
+    </p>
 
-        </el-main>
-
-
-  <!--  </el-container>-->
-        <el-header>
-            <span>
-                请核对商品
-            </span>
-          </el-header>
-         <el-table
-        stripe
-        ref="table"
-        :data="items"
-        height="400"
-        :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
-        @selection-change="(x)=>{this.selection=x}"
-        :row-style="{height: '40px'}"
-
-       
+    <el-row>
+      <el-col
+        :span="6"
+        v-for="k in [1,2,3]"
+        :key="k"
       >
-       <!--这里不知道要不要把商品名单大小写死-->
-        <el-table-column type="selection" />
-        <el-table-column>
-          <template v-slot:default="scope">
-            <el-image
-              class="cart-cover"
-              :src="scope.row.cover | media2url"
-              fit="contain"
-              lazy
-              style="width:60px;height:80px"
-            ></el-image>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="图书信息"
-        ></el-table-column>
-        <el-table-column label="单价">
-          <template v-slot:default="scope">
-            {{scope.row.price | formatPrice}}
-          </template>
-        </el-table-column>
-        <el-table-column label="数量">
-          <template v-slot:default="scope">
-            <el-input-number
-              v-model="scope.row.count"
-              :min="1"
-              size="small"
-            ></el-input-number>
-          </template>
-        </el-table-column>
-        <el-table-column label="合计">
-          <template slot-scope="scope">
-            {{scope.row.price * scope.row.count | formatPrice}}
-          </template>
-        </el-table-column>
-        <el-table-column label="操作">
-          <template v-slot:default="scope">
-            <el-button
-              size="small"
-              type="danger"
-              @click.native.prevent="deleteRow(scope.$index)"
-            >
-              删除
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+        <AddrItem></AddrItem>
+      </el-col>
+    </el-row>
 
-    <div >
-        
-      <el-card
-         shadow="always"
-       class="card-foot"
-      >
+    <!--  </el-container>-->
+    <el-header>
       <span>
+        请核对商品
+      </span>
+    </el-header>
+    <el-table
+      stripe
+      ref="table"
+      :data="items"
+      height="400"
+      :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
+      @selection-change="(x)=>{this.selection=x}"
+      :row-style="{height: '40px'}"
+    >
+      <!--这里不知道要不要把商品名单大小写死-->
+      <el-table-column type="selection" />
+      <el-table-column>
+        <template v-slot:default="scope">
+          <el-image
+            class="cart-cover"
+            :src="scope.row.cover | media2url"
+            fit="contain"
+            lazy
+            style="width:60px;height:80px"
+          ></el-image>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="图书信息"
+      ></el-table-column>
+      <el-table-column label="单价">
+        <template v-slot:default="scope">
+          {{scope.row.price | formatPrice}}
+        </template>
+      </el-table-column>
+      <el-table-column label="数量">
+        <template v-slot:default="scope">
+          <el-input-number
+            v-model="scope.row.count"
+            :min="1"
+            size="small"
+          ></el-input-number>
+        </template>
+      </el-table-column>
+      <el-table-column label="合计">
+        <template slot-scope="scope">
+          {{scope.row.price * scope.row.count | formatPrice}}
+        </template>
+      </el-table-column>
+      <el-table-column label="操作">
+        <template v-slot:default="scope">
+          <el-button
+            size="small"
+            type="danger"
+            @click.native.prevent="deleteRow(scope.$index)"
+          >
+            删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <div>
+
+      <el-card
+        shadow="always"
+        class="card-foot"
+      >
+        <span>
           寄送至：xx省xx市xx区 xxx
           收件人：xxx
-      </span>
-              <el-divider direction="vertical"></el-divider>
+        </span>
+        <el-divider direction="vertical"></el-divider>
         <span>已选择: {{selection.length}} 件</span>
         <el-divider direction="vertical"></el-divider>
         <span>
@@ -107,11 +108,11 @@
           @click="checkout()"
         >去 支 付</el-button>
       </el-card>
-       
+
     </div>
 
-</el-container>
-    
+  </el-container>
+
 </template>
 
 
@@ -194,9 +195,9 @@ export default {
   color: white;
 
   overflow: hidden;
-  width:100%;
-    position: fixed;
-  bottom:0;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
 }
 .check-button {
   margin: 0 0 0 67%;
@@ -205,16 +206,14 @@ export default {
   font-size: 130%;
   background-color: white;
 }
-.card-foot
-{
-  margin: 0%; 
-    padding: 0 2%;
-    background-color: rgba(58, 130, 119, 0.7);
-    color: white;
-    overflow: hidden;
-    width: 70.3%;
-    position: fixed;
-    bottom: 0;
+.card-foot {
+  margin: 0%;
+  padding: 0 2%;
+  background-color: rgba(58, 130, 119);
+  color: white;
+  overflow: hidden;
+  width: 70.3%;
+  position: fixed;
+  bottom: 0;
 }
-
 </style>

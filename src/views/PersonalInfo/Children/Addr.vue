@@ -20,10 +20,15 @@
     </el-header>
 
     <el-main>
-      <AddrItem
-        v-for="k in [1,2,3]"
-        :key="k"
-      ></AddrItem>
+      <el-row>
+        <el-col
+          :span="8"
+          v-for="k in [1,2,3]"
+          :key="k"
+        >
+          <AddrItem></AddrItem>
+        </el-col>
+      </el-row>
     </el-main>
   </div>
 </template>

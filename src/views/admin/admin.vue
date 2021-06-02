@@ -6,8 +6,8 @@
             <img v-else src="./images/no_login.jpg" class="navbar-brand-img mx-auto">
             不知道有没有头像 先这么写了-->
 
-        <el-header>
-            <!--
+      <el-header>
+        <!--
              <img
           src="../../assets/bread.png"
           alt="bread"
@@ -16,11 +16,11 @@
         >
         -->
 
-            <h1>
-                        <i class="el-icon-setting"></i>
-                管理页面
-            </h1>
-        </el-header>
+        <h1 style="color:rgb(58, 130, 119)">
+          <i class="el-icon-setting"></i>
+          管理页面
+        </h1>
+      </el-header>
       <el-menu :unique-opened="true">
         <el-menu-item
           index="1"
@@ -29,7 +29,7 @@
           <i class="el-icon-document-copy"></i>
           <span slot="title">商品信息</span>
         </el-menu-item>
-       
+
         <el-menu-item
           index="2"
           @click="goTo('/admin/goodsadd')"
@@ -73,6 +73,9 @@ export default
   display: block;
   height: 60vh;
   position: relative;
+  border-width: 0.2vw;
+  border-style: solid;
+  border-color: rgba(91, 155, 148, 0.7);
 }
 .el-main {
   padding: 0 2%;
