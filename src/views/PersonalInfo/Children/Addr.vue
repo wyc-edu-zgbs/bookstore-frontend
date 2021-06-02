@@ -1,19 +1,28 @@
 <template>
-  <div>
+  <div v-loading="is_loading" >
     <el-header>
       <span id="title">收货地址管理</span>
       <el-button
         class="add"
         type="primary"
         icon="el-icon-plus"
-      >
+        @click="new_addr_diag_visible = true"
+        >
         新增收货地址
       </el-button>
+
+      <AddrDialog
+        :visible.sync="new_addr_diag_visible"
+        :addr="empty_addr"
+        @updateaddr="new_addr($event)"
+        >
+      </AddrDialog>
+
       <span id="stitle">最多可创建9个收货地址</span>
     </el-header>
 
     <el-main>
-      <AddrItem></AddrItem>
+      <AddrItem v-for="k in [1,2,3]" :key="k"></AddrItem>
     </el-main>
   </div>
 </template>
@@ -21,9 +30,32 @@
 <script>
 
 import AddrItem from '../../../components/AddrItem.vue'
+import AddrDialog from '../../../components/AddrDialog.vue'
+
 export default {
+  data() {
+    return {
+      empty_addr: {
+        name: '',
+        region: '',
+        detail: "",
+        tel: "",
+        adpca: ["", "", ""],
+      },
+      new_addr_diag_visible: false,
+      is_loading: false
+    }
+  },
   components: {
-    AddrItem
+    AddrItem,
+    AddrDialog
+  },
+  methods: {
+    new_addr(e) {
+      this.is_loading = true
+      console.log(e)
+      setTimeout(this.$router.go, 1)
+    }
   }
 }
 

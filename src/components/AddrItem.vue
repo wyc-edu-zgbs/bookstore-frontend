@@ -2,6 +2,7 @@
   <el-card
     class="addr-card"
     shadow="hover"
+    v-loading="is_loading"
   >
     <div class="addr-header">
       <i class="el-icon-user-solid"></i>
@@ -42,7 +43,8 @@
 
     <AddrDialog
       :visible.sync="dialogFormVisible"
-      v-model="form"
+      :addr="form"
+      @updateaddr="updateaddr($event)"
       ></AddrDialog>
 
   </el-card>
@@ -57,6 +59,7 @@ export default {
   data() {
     return {
       form: {
+        id: "028bdac0-c371-11eb-a887-757050c39c90",
         name: '张三',
         region: '北京市海淀区',
         detail: "北京航空航天大学",
@@ -70,7 +73,8 @@ export default {
         children: 'children',
         value: 'code'
       },
-      dialogFormVisible: false
+      dialogFormVisible: false,
+      is_loading: false
     }
   },
 
@@ -85,6 +89,11 @@ export default {
   },
 
   methods: {
+    updateaddr(e) {
+      this.is_loading = true
+      console.log(e)
+      setTimeout(this.$router.go, 1)
+    },
   },
 }
 </script>

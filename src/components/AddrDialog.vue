@@ -2,7 +2,7 @@
   <el-dialog
     title="收货地址"
     :visible="visible"
-    @update:visible="cancel_dialog"
+    @update:visible="close_dialog()"
     width="30%"
     center
   >
@@ -47,10 +47,10 @@
       slot="footer"
       class="dialog-footer"
     >
-      <el-button @click="cancel_dialog">取消</el-button>
+      <el-button @click="close_dialog">取消</el-button>
       <el-button
         type="primary"
-        @click="close_dialog(); $emit('updateform', deepcopy(form))"
+        @click="$emit('updateaddr', form); close_dialog()"
         >
       确定
       </el-button>
@@ -71,27 +71,22 @@ export default {
         value: 'code'
       },
       dialogFormVisible: this.visible,
-      form: this.deepcopy(this.orig_form)
+      form: this.deepcopy(this.addr)
     }
   },
-  model: {
-    prop: "orig_form",
-    event: "updateform"
-  },
   props: {
-    orig_form: {
+    addr: {
     },
     visible: {
       default: false
     }
   },
+  watch: {
+  },
   methods: {
     close_dialog() {
+      this.form = this.deepcopy(this.addr)
       this.$emit("update:visible", false)
-    },
-    cancel_dialog() {
-      this.form = this.deepcopy(this.orig_form)
-      this.close_dialog()
     },
     handleChange() {
       const addrNodes = this.$refs['cascaderAddr'].getCheckedNodes()
