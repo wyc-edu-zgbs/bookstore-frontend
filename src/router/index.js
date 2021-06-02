@@ -67,6 +67,36 @@ const routes = [
         component: ()=> import('../views/PersonalInfo/Children/Addr.vue')
       }
     ]
+  },
+  {
+    path:'/admin',
+    name:'Admin',
+    component:()=>import('../views/admin/admin.vue'),
+    children:
+    [
+      {
+        path:'goodsadd',
+        component:()=>import('../views/admin/Chlidren/GoodsAdd.vue')
+      },
+      {
+        path:'goodsshow',
+        component:()=>import('../views/admin/Chlidren/GoodsShow.vue')
+      },
+      {
+        path:'goodsupdate',
+        component:()=>import('../views/admin/Chlidren/GoodsUpdate.vue')
+      },
+      {
+        path:'orderupdate',
+        component:()=>import('../views/admin/Chlidren/OrderUpdate.vue')
+      }
+    ]
+
+  },
+  {
+    path:'/orderconfirm',
+    name:'OrderConfirm',
+    component:()=> import('../views/OrderConfirm.vue')
   }
 ]
 
