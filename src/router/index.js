@@ -61,6 +61,10 @@ const routes = [
       {
         path:'addr',
         component: ()=> import('../views/PersonalInfo/Children/Addr.vue')
+      },
+      {
+        path:'myorder',
+        component:()=>import('../views/PersonalInfo/Children/Sales.vue')
       }
     ]
   },

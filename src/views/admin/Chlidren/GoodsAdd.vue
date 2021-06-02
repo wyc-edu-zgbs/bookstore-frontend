@@ -7,16 +7,19 @@
           :size="200"
           :src="book.cover | media2url"
           style="margin-right: 20px"
+          shape="square"
         ></el-avatar>
-            <el-button @click.native="changepic()" class="changepic" type="info" plain>
+            <el-button @click.native="changepic()" type="info" plain           style="margin-right: 2px">
                     <i class="el-icon-edit"></i><span>上传图片</span>
             </el-button>
     
 
-      </div>
-      <div class="message">
+      </div >
+      <div class="message" style="margin-top=10%">
+                 <div class="goods-item">
         <span          clearable
           style="width:350px;height:50px">ID: {{book.id}}</span>
+                 </div>
 
          <div class="goods-item">
         <span>名称</span>

@@ -2,25 +2,12 @@
     <el-container style="height: 100%; width: 100%; border: 0px">
         <el-header style="text-align: left; font-size: 20px; display: flex; justify-content: space-between;">
             <span style="color: black;font-size: 30px">所有商品</span>
-            <el-button class="emptytrash" type="success" @click.native="emptyTrash">
+            <el-button class="emptytrash" type="success" @click.native="goTo('/admin/goodsadd')">
                 <i class="el-icon-plus"></i><span>添加商品</span>
             </el-button>
-<!--          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">-->
-<!--            <el-menu-item index="1" @click="recently">最近使用</el-menu-item>-->
-<!--            <el-menu-item index="2" @click="myproduction">我创建的</el-menu-item>-->
-<!--            <el-menu-item index="3" @click="favorite">我的收藏</el-menu-item>-->
-<!--            <el-menu-item index="4" @click="trashbin">回收站</el-menu-item>-->
-<!--          </el-menu>-->
-<!--          <el-card :body-style="{ padding: '0px' }" shadow="hover" class="newfile" @click.native="createFile">-->
-<!--            <i class="el-icon-circle-plus bt">新建文档</i>-->
-<!--          </el-card>-->
+
         </el-header>
-<!--        <el-dialog title="是否新建私人文档" :visible.sync="dialog1" width="30%">-->
-<!--          <div slot="footer" class="dialog-footer">-->
-<!--            <el-button @click="dialog1=false">取 消</el-button>-->
-<!--            <el-button type="primary" @click="submit()" >确 定</el-button>-->
-<!--          </div>-->
-<!--        </el-dialog>-->
+
         <el-main>
         <el-table :data="book" height=666px style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}" 
                 :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
@@ -30,11 +17,7 @@
             <el-table-column prop="name" label="商品名称" ></el-table-column>
             <el-table-column prop="stock" label="商品库存" ></el-table-column>   
             <el-table-column prop="price" label="商品价格" ></el-table-column>  
-<!--
-            <el-table-column prop="creator_name" label="文档创建人" width="240px"></el-table-column>
-            <el-table-column prop="delete_time" :formatter="dateFormat" label="删除日期" width="240px"></el-table-column>
 
-                            -->
             <el-table-column fixed="right" width="50">
 
             <template slot-scope="scope">
@@ -58,24 +41,7 @@
         </el-table>
 
         </el-main>
-<!--        <el-dialog title="确认清空回收站" :visible.sync="dialog3" width="30%">-->
-<!--          <div slot="footer" class="dialog-footer">-->
-<!--            <el-button @click="dialog3=false">取 消</el-button>-->
-<!--            <el-button type="primary" @click="Empty()" >确定</el-button>-->
-<!--          </div>-->
-<!--        </el-dialog>-->
-<!--        <el-dialog title="确认将文档从回收站放回原处" :visible.sync="dialog" width="30%">-->
-<!--          <div slot="footer" class="dialog-footer">-->
-<!--            <el-button @click="dialog=false">取 消</el-button>-->
-<!--            <el-button type="primary" @click="submitredo()" >确定</el-button>-->
-<!--          </div>-->
-<!--        </el-dialog>-->
-<!--        <el-dialog title="确认将文档从回收站彻底删除" :visible.sync="dialog2" width="30%">-->
-<!--          <div slot="footer" class="dialog-footer">-->
-<!--            <el-button @click="dialog2=false">取 消</el-button>-->
-<!--            <el-button type="primary" @click="submitdel()" >确定</el-button>-->
-<!--          </div>-->
-<!--        </el-dialog>-->
+
     </el-container>
 </template>
 <script>
@@ -121,6 +87,9 @@ export default {
             this.submitdel();
         });
     },
+     goTo(path) {
+        this.$router.replace(path);
+      }
   }
 
 }

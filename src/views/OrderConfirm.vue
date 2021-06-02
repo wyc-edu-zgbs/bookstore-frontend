@@ -12,6 +12,7 @@
         </el-header>
         <el-main>
                   <AddrItem></AddrItem>
+
         </el-main>
 
 
@@ -85,7 +86,7 @@
         
       <el-card
          shadow="always"
-       class="cart-footer-right"
+       class="card-foot"
       >
       <span>
           寄送至：xx省xx市xx区 xxx
@@ -204,6 +205,16 @@ export default {
   font-size: 130%;
   background-color: white;
 }
-
+.card-foot
+{
+  margin: 0%; 
+    padding: 0 2%;
+    background-color: rgba(58, 130, 119, 0.7);
+    color: white;
+    overflow: hidden;
+    width: 70.3%;
+    position: fixed;
+    bottom: 0;
+}
 
 </style>

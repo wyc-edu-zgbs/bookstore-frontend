@@ -3,7 +3,7 @@
         <el-header style="text-align: left; font-size: 20px; display: flex; justify-content: space-between;">
             <span style="color: black;font-size: 30px">所有订单</span>
             <el-button class="emptytrash" type="success" @click.native="selectnew()">
-                <i class="el-icon-plus"></i><span>仅看未处理订单</span>
+                <i class="el-icon-plus"></i><span>仅看未完成订单</span>
             </el-button>
 
         </el-header>
@@ -38,7 +38,7 @@
             <!--
             <el-table-column prop="id" label="订单id" @contextmenu.prevent="" width="300px"></el-table-column>
             -->
-            <el-table-column prop="user" label="用户id" ></el-table-column>
+           
             <el-table-column label='预览'>
           <template slot-scope="scope">
 
@@ -79,9 +79,9 @@
           {{scope.row.items.map(x=>x.count*x.price).reduce((a,b)=>a+b, 0) | formatPrice}}
                 </template>
             </el-table-column>
-
+                <!--
             <el-table-column fixed="right" width="50">
-  
+
             <template slot-scope="scope">
                 <el-tooltip class="item" effect="dark" content="发货" placement="bottom-end">
                   <el-button @click.native="pushorder(scope.row.id)" type="text" style="color: #999" size="medium">
@@ -99,6 +99,7 @@
                 </el-tooltip>
               </template>
             </el-table-column>
+            -->
             
         </el-table>
 
