@@ -13,25 +13,23 @@
         <router-link to="/search">Search</router-link>
       </div>
       <router-view />
+      <Foot></Foot>
     </el-col>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Foot from './components/Foot.vue'
 
 export default {
   components: {
-    Header
+    Header,
+    Foot
   }
 }
 </script>
-
-<style >
-body {
-  background-color: #eaece1;
-}
-
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -51,3 +49,4 @@ body {
   color: #42b983;
 }
 </style>
+

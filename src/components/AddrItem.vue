@@ -23,81 +23,34 @@
     <p class="text-wrapper"><i class="el-icon-phone"></i> {{form.tel}}</p>
     <p class="text-wrapper"><i class="el-icon-location"></i> {{form.region+form.detail}}</p>
 
-    <el-divider></el-divider>
+    <span v-if="editable">
+      <el-divider></el-divider>
 
-    <el-button
-      class="addr-button"
-      type="text"
-      size="small"
-    ><i class="el-icon-remove-outline"></i> 删除</el-button>
+      <el-button
+        class="addr-button"
+        type="text"
+        size="small"
+      ><i class="el-icon-remove-outline"></i> 删除</el-button>
+      
+      <el-button
+        type="text"
+        class="addr-button"
+        @click="dialogFormVisible = true"
+        size="small"
+      ><i class="el-icon-edit"></i> 修改</el-button>
+    </span>
 
-    <el-button
-      type="text"
-      class="addr-button"
-      @click="dialogFormVisible = true"
-      size="small"
-    ><i class="el-icon-edit"></i> 修改</el-button>
-
-    <el-dialog
-      title="收货地址"
+    <AddrDialog
       :visible.sync="dialogFormVisible"
-      width="30%"
-      center
-    >
-      <el-form
-        :model="form"
-        label-width="25%"
-        label-position="right"
-      >
-        <el-form-item label="收货人：">
-          <el-input
-            v-model="form.name"
-            autocomplete="off"
-            style="width:70%"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="电话：">
-          <el-input
-            v-model="form.tel"
-            autocomplete="off"
-            style="width:70%"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="地址：">
-          <el-cascader
-            v-model="form.adpca"
-            :options="pcaOptions"
-            :props="addressProps"
-            @change="handleChange"
-            ref="cascaderAddr"
-            placeholder="请选择地址"
-          ></el-cascader>
-        </el-form-item>
-        <el-form-item label="详细地址：">
-          <el-input
-            v-model="form.detail"
-            autocomplete="off"
-            style="width:70%"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <div
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button
-          type="primary"
-          @click="dialogFormVisible = false"
-        >确 定</el-button>
-      </div>
-    </el-dialog>
+      v-model="form"
+      ></AddrDialog>
 
   </el-card>
 </template>
 
 <script>
 
+import AddrDialog from "./AddrDialog"
 const pca = require('../assets/pca.json')
 
 export default {
@@ -121,12 +74,18 @@ export default {
     }
   },
 
+  props: {
+    editable: {
+      default: true
+    }
+  },
+
+  components: {
+    AddrDialog
+  },
+
   methods: {
-    handleChange() {
-      const addrNodes = this.$refs['cascaderAddr'].getCheckedNodes()
-      this.form.region = (addrNodes[0].pathLabels[1] == "市辖区" || addrNodes[0].pathLabels[1] == "县") ?
-        addrNodes[0].pathLabels[0] + addrNodes[0].pathLabels[2] : addrNodes[0].pathLabels.join("")
-    },
+
   },
 }
 </script>
