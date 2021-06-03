@@ -11,18 +11,23 @@
         <router-link to="/login">Greeter</router-link> |
         <router-link to="/book/:id">Book</router-link> |
         <router-link to="/search">Search</router-link>
+        |
+        <router-link to="/personInfo/Profile">personInfo</router-link>
       </div>
       <router-view />
+      <Foot></Foot>
     </el-col>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Foot from './components/Foot.vue'
 
 export default {
   components: {
-    Header
+    Header,
+    Foot
   }
 }
 </script>
@@ -47,8 +52,3 @@ export default {
 }
 </style>
 
-<style>
-body {
-  background-color: #eaece1;
-}
-</style>

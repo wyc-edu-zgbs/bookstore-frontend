@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="is_loading" >
+  <div v-loading="is_loading">
     <el-header>
       <span id="title">收货地址管理</span>
       <el-button
@@ -7,7 +7,7 @@
         type="primary"
         icon="el-icon-plus"
         @click="new_addr_diag_visible = true"
-        >
+      >
         新增收货地址
       </el-button>
 
@@ -15,14 +15,20 @@
         :visible.sync="new_addr_diag_visible"
         :addr="empty_addr"
         @updateaddr="new_addr($event)"
-        >
+      >
       </AddrDialog>
-
-      <span id="stitle">最多可创建9个收货地址</span>
     </el-header>
 
     <el-main>
-      <AddrItem v-for="k in [1,2,3]" :key="k"></AddrItem>
+      <el-row>
+        <el-col
+          :span="8"
+          v-for="k in [1,2,3]"
+          :key="k"
+        >
+          <AddrItem></AddrItem>
+        </el-col>
+      </el-row>
     </el-main>
   </div>
 </template>
@@ -73,14 +79,11 @@ export default {
 
 .el-main {
   background-color: white;
+  padding: 1%;
 }
 #title {
   font-weight: bold;
   font-size: 130%;
   color: rgb(58, 130, 119);
-}
-#stitle {
-  color: rgb(8, 46, 25);
-  padding: 0 3%;
 }
 </style>

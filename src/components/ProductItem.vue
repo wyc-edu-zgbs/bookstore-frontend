@@ -1,9 +1,9 @@
 <template>
-  <router-link :to="'/book/' + product.id">
-    <el-card
-      class="product"
-      shadow="hover"
-    >
+  <el-card
+    class="product"
+    shadow="hover"
+  >
+    <router-link :to="'/book/' + product.id">
       <el-image
         :src="product.cover | media2url"
         class="pro_img"
@@ -30,8 +30,9 @@
           size="mini"
         ><i class="el-icon-goods"></i> 立即购买</el-button>
       </el-row>
-    </el-card>
-  </router-link>
+    </router-link>
+  </el-card>
+
 </template>
 
 <script>
@@ -49,17 +50,17 @@ export default {
 <style scoped>
 .product {
   text-align: left;
-  width: 90%;
-  height: 70%;
-  background: rgba(255, 255, 255, 0.7);
-  margin: 3%;
+  width: 85%;
+  height: 75%;
+  margin: 2% 4%;
+  padding-left: 1vw;
 }
 
 .el-image {
   position: relative;
-  width: 100%;
-  height: 7cm;
-  margin: 0 0 -5%;
+  width: 90%;
+  height: 33vh;
+  margin: 0 0 -2vh 0;
 }
 
 a {
@@ -73,11 +74,13 @@ a {
 .title {
   font-size: 110%;
   font-weight: bold;
+  color: black;
 }
 
 .author {
   font-size: 70%;
   margin: -5% 0 5%;
+  color: black;
 }
 
 .new-price {
@@ -102,3 +105,4 @@ a {
   padding: 4% 3%;
 }
 </style>
+

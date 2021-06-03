@@ -1,6 +1,13 @@
 <template>
   <el-container>
-    <el-card class="main">
+    <el-header>
+      <span id="title">个人资料管理</span>
+    </el-header>
+
+    <el-card
+      class="main"
+      shadow="never"
+    >
       <div>
         <el-avatar
           class="bigpic"
@@ -348,11 +355,19 @@ export default {
 <style   scoped>
 .main {
   position: relative;
-  width: 860px;
-  height: 350px;
+  width: 100%;
+  height: 56vh;
   padding: 20px 0;
   color: #999;
-  background-color: rgba(255, 255, 255, 0.7);
+}
+.el-header {
+  padding: 2%;
+  background-color: rgba(91, 155, 148, 0.3);
+}
+#title {
+  font-weight: bold;
+  font-size: 130%;
+  color: rgb(58, 130, 119);
 }
 .bigpic {
   position: absolute;
@@ -366,7 +381,7 @@ export default {
 }
 .message {
   position: absolute;
-  left: 420px;
-  top: 15px;
+  left: 25vw;
+  top: 4vh;
 }
 </style>
