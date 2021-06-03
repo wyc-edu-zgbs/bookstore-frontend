@@ -23,10 +23,14 @@
       <el-row>
         <el-col
           :span="8"
-          v-for="k in [1,2,3]"
-          :key="k"
+          v-for="addr in addresses.addresses"
+          :key="addr.id"
         >
-          <AddrItem></AddrItem>
+          <AddrItem
+            :form="addr"
+            :isDefault="addr.id == addresses.default"
+            :editable="true"
+            ></AddrItem>
         </el-col>
       </el-row>
     </el-main>
@@ -49,7 +53,44 @@ export default {
         adpca: ["", "", ""],
       },
       new_addr_diag_visible: false,
-      is_loading: false
+      is_loading: false,
+      addresses: {
+        default: "028bdac0-c371-11eb-a887-757050c39c90",
+        addresses: [
+          {
+            id: "028bdac0-c371-11eb-a887-757050c39c90",
+            name: '张三',
+            region: '北京市海淀区',
+            detail: "北京航空航天大学",
+            tel: "12345678910",
+            adpca: ["11", "1101", "110108"],
+          },
+          {
+            id: "128bdac0-c371-11eb-a887-757050c39c90",
+            name: '张三',
+            region: '北京市海淀区',
+            detail: "北京航空航天大学",
+            tel: "12345678910",
+            adpca: ["11", "1101", "110108"],
+          },
+          {
+            id: "228bdac0-c371-11eb-a887-757050c39c90",
+            name: '张三',
+            region: '北京市海淀区',
+            detail: "北京航空航天大学",
+            tel: "12345678910",
+            adpca: ["11", "1101", "110108"],
+          },
+          {
+            id: "528bdac0-c371-11eb-a887-757050c39c90",
+            name: '张三',
+            region: '北京市海淀区',
+            detail: "北京航空航天大学",
+            tel: "12345678910",
+            adpca: ["11", "1101", "110108"],
+          },
+        ]
+      }
     }
   },
   components: {

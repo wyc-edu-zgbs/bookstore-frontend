@@ -8,7 +8,7 @@
       <i class="el-icon-user-solid"></i>
       <span class="text-wrapper"> {{form.name}} </span>
       <el-button
-        v-if="!form.isDef"
+        v-if="!isDefault"
         type="text"
         class="de-button"
       > 设为默认地址</el-button>
@@ -58,15 +58,6 @@ const pca = require('../assets/pca.json')
 export default {
   data() {
     return {
-      form: {
-        id: "028bdac0-c371-11eb-a887-757050c39c90",
-        name: '张三',
-        region: '北京市海淀区',
-        detail: "北京航空航天大学",
-        tel: "12345678910",
-        adpca: ["11", "1101", "110108"],
-        isDef: true,
-      },
       pcaOptions: pca,
       addressProps: {
         label: 'name',
@@ -81,6 +72,10 @@ export default {
   props: {
     editable: {
       default: true
+    },
+    form: {},
+    isDefault: {
+      default: false
     }
   },
 
