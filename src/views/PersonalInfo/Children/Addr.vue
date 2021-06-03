@@ -19,7 +19,7 @@
       </AddrDialog>
     </el-header>
 
-    <el-main>
+    <el-main v-if="addresses.addresses">
       <el-row>
         <el-col
           :span="8"
@@ -97,11 +97,41 @@ export default {
     AddrItem,
     AddrDialog
   },
+  mounted() {
+    this.update()
+  },
   methods: {
+    update() {
+      this.is_loading = true
+      this.addresses = {}
+      this.$http.get("/api/address")
+        .then((response) => {
+          this.addresses = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.is_loading = false)
+    },
     new_addr(e) {
       this.is_loading = true
-      console.log(e)
-      setTimeout(this.$router.go, 1)
+      this.$http.put("/api/address", e)
+        .then((response) => {
+          this.$message("add success")
+          this.$router.go()
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.update())
     }
   }
 }

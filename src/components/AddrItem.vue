@@ -11,6 +11,7 @@
         v-if="!isDefault"
         type="text"
         class="de-button"
+        @click="set_default"
       > 设为默认地址</el-button>
       <el-tag
         v-else
@@ -31,6 +32,7 @@
         class="addr-button"
         type="text"
         size="small"
+        @click="remove"
       ><i class="el-icon-remove-outline"></i> 删除</el-button>
 
       <el-button
@@ -86,9 +88,40 @@ export default {
   methods: {
     updateaddr(e) {
       this.is_loading = true
-      console.log(e)
-      setTimeout(this.$router.go, 1)
+      this.$http.post("/api/address", e)
+        .then(()=>this.$router.go())
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
     },
+    remove() {
+      this.is_loading = true
+      this.$http.delete("/api/address/" + this.form.id)
+        .then(()=>this.$router.go())
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+    },
+    set_default() {
+      this.is_loading = true
+      this.$http.post("/api/user", {default_address: this.form.id})
+        .then(()=>this.$router.go())
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+    }
   },
 }
 </script>
