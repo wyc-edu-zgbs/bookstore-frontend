@@ -9,14 +9,14 @@
         background-color="white"
         text-color="rgb(58, 130, 119)"
         :collapse="true"
-        collapse-transition="false"
+        :collapse-transition="false"
       >
         <el-submenu
           :index="(index+'')"
           v-for="(item,index) in Object.keys(menus)"
           :key="index"
-          show-timeout=10
-          hide-timeout=10
+          :show-timeout=10
+          :hide-timeout=10
           id="sub"
         >
           <template

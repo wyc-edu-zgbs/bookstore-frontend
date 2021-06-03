@@ -97,7 +97,7 @@ export default {
           "cover": "s33684681.jpg",
           "author": "[爱尔兰] 萨莉·鲁尼 ",
           "price": 49.8,
-          "id": "d99a716f-b952-11eb-8bfc-f1ff82be21dd",
+          "id": "f99a716f-b952-11eb-8bfc-f1ff82be21dd",
           "rating": 0.8
         }],
         [{
