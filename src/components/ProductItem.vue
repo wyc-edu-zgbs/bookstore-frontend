@@ -11,8 +11,10 @@
       />
       <p class="title">{{product.name}}</p>
       <p class="author">{{product.author}}</p>
-      <span class="new-price">{{(product.price*product.rating) | formatPrice}}</span>
-      <span class="old-price">定价: {{product.price | formatPrice}}</span>
+      <span class="new-price">{{product.price | formatPrice}}</span>
+      <span class="old-price" v-if="product.original_price">
+        定价: {{product.original_price | formatPrice}}
+      </span>
       <!-- <div class="button"> -->
       <el-row
         type="flex"

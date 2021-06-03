@@ -154,7 +154,7 @@ export default {
             data.username = this.form.nickname
           }
           this.$http.post(
-            this.register ? "/api/register/" : "/api/login/",
+            this.register ? "/api/register" : "/api/login",
             data)
             .then((response) => {
               if (response.data.detail) {

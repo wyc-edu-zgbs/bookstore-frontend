@@ -5,6 +5,6 @@ Vue.filter('formatPrice', (value)=>{
 });
 
 Vue.filter('media2url', (value)=>{
-    return process.env.BASE_URL + 'media/' + value
+    return '/api/pictures/' + value
 });
 

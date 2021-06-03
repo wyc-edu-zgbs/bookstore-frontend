@@ -1,5 +1,5 @@
 <template>
-  <div class="item-container">
+  <div class="item-container" v-loading="is_loading">
     <el-radio-group v-model="sort_key" @change="selectSort">
       <el-radio-button label="sort_default">default</el-radio-button>
       <el-radio-button label="price_desc"></el-radio-button>
@@ -53,9 +53,10 @@ export default {
       item_per_rows: 4,
       totalPages: 1,
       product_rows: [],
+      is_loading: true,
       demo_products: {
         "pages": 12,
-        "contents": [
+        "content": [
           {
             "name": "寻找《局外人》",
             "cover": "s33658199.jpg",
@@ -117,7 +118,7 @@ export default {
     }
   },
   mounted() {
-    this.showProducts(this.demo_products)
+    this.show()
   },
   watch: {
     $route() {
@@ -126,11 +127,13 @@ export default {
   },
   methods: {
     show() {
+      this.is_loading = true;
       this.product_rows = []
       // while (this.product_rows.length) {this.product_rows.pop()}
       this.$http.get("/api" + this.$route.fullPath)
         .then((response) => {
           this.showProducts(response.data)
+          console.log(this.product_rows)
         })
         .catch((error) => {
           console.log(error)
@@ -139,10 +142,11 @@ export default {
             message: error
           })
         })
+        .finally(() => this.is_loading = false)
     },
     showProducts(resp) {
       this.totalPages = resp.pages
-      for (let i of chunk(resp.contents, this.item_per_rows)) {
+      for (let i of chunk(resp.content, this.item_per_rows)) {
         this.product_rows.push(i)
       }
     },

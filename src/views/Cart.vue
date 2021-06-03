@@ -12,6 +12,7 @@
         height="500"
         :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
         @selection-change="(x)=>{this.selection=x}"
+        v-loading="is_loading"
       >
         <el-table-column type="selection" />
         <el-table-column>
@@ -39,6 +40,7 @@
               v-model="scope.row.count"
               :min="1"
               size="small"
+              @change="(curval)=>change_count(scope.row, curval)"
             ></el-input-number>
           </template>
         </el-table-column>
@@ -52,7 +54,7 @@
             <el-button
               size="small"
               type="danger"
-              @click.native.prevent="deleteRow(scope.$index)"
+              @click.native.prevent="change_count(scope.row, 0)"
             >
               删除
             </el-button>
@@ -87,60 +89,43 @@
 <script>
 export default {
   methods: {
-    deleteRow(idx) {
-      console.log("del", idx)
+    change_count(row, count) {
+      console.log("chg", row.id, count)
+      this.$http.post("/api/cart", {id: row.id, count: count})
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.update())
     },
-    selec(v) {
-      console.log(v)
+    update() {
+      this.is_loading = true
+      this.items = []
+      this.$http.get("/api/cart")
+        .then((response) => {
+          this.items = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.is_loading = false)
     }
+  },
+  mounted() {
+    this.update()
   },
   data() {
     return {
+      is_loading: true,
       selection: [],
-      items: [
-        {
-          "count": 7,
-          "id": "ad727512-bd80-11eb-a8b8-c1e635d27859",
-          "name": "寻找《局外人》",
-          "cover": "s33658199.jpg",
-          "price": 98.0
-        },
-        {
-          "count": 9,
-          "id": "ad727513-bd80-11eb-a8b8-c1e635d27859",
-          "name": "不要和你妈争辩",
-          "cover": "s33610259.jpg",
-          "price": 39.8
-        },
-        {
-          "count": 5,
-          "id": "ad727514-bd80-11eb-a8b8-c1e635d27859",
-          "name": "鞋带",
-          "cover": "s33601424.jpg",
-          "price": 45
-        },
-        {
-          "count": 6,
-          "id": "ad727515-bd80-11eb-a8b8-c1e635d27859",
-          "name": "正常人",
-          "cover": "s33684681.jpg",
-          "price": 49.8
-        },
-        {
-          "count": 9,
-          "id": "ad727516-bd80-11eb-a8b8-c1e635d27859",
-          "name": "光明共和国",
-          "cover": "s33625558.jpg",
-          "price": 46
-        },
-        {
-          "count": 2,
-          "id": "ad727517-bd80-11eb-a8b8-c1e635d27859",
-          "name": "往复书简：初恋与不伦",
-          "cover": "s33668217.jpg",
-          "price": 42.0
-        }
-      ]
+      items: []
     }
   }
 }

@@ -1,81 +1,83 @@
 <template>
-  <div
-    class="book-container"
-    :key="key"
-    v-if="key"
-  >
-    <el-row
-      type="flex"
-      justify="space-around"
+  <div v-loading="is_loading">
+    <div
+      class="book-container"
+      :key="key"
+      v-if="key"
     >
-
-      <el-col
-        :span="7"
-        :offset="1"
+      <el-row
+        type="flex"
+        justify="space-around"
       >
-        <img
-          :src="book.cover | media2url"
-          class="book-img"
-        />
-      </el-col>
-
-      <el-col :span="12">
-        <div class="book-hd">
-          <h1>
-            {{book.name}}
-          </h1>
-        </div>
-        <div class="book-subtitle">
-          <p>—— {{book.subtitle}}</p>
-        </div>
-
-        <div class="book-publish">
-          <p>作者：<span class="book-search">{{book.author}}</span></p>
-          <p>出版社：<span class="book-search">{{book.press}}</span> &nbsp;&nbsp; 出版时间：{{book.date}}</p>
-          <p> ISBN：{{book.isbn}}</p>
-        </div>
-
-        <div class="book-price">
-          <p>抢购价 </p>
-          <p> <span class="new-price">{{getPrice | formatPrice}}</span>
-            <span class="book-rate">{{book.rating}}折</span>
+    
+        <el-col
+          :span="7"
+          :offset="1"
+        >
+          <img
+            :src="book.cover | media2url"
+            class="book-img"
+          />
+        </el-col>
+    
+        <el-col :span="12">
+          <div class="book-hd">
+            <h1>
+              {{book.name}}
+            </h1>
+          </div>
+          <div class="book-subtitle">
+            <p>—— {{book.subtitle}}</p>
+          </div>
+    
+          <div class="book-publish">
+            <p>作者：<span class="book-search">{{book.author}}</span></p>
+            <p>出版社：<span class="book-search">{{book.press}}</span> &nbsp;&nbsp; 出版时间：{{book.date}}</p>
+            <p> ISBN：{{book.isbn}}</p>
+          </div>
+    
+          <div class="book-price">
+            <p>抢购价 </p>
+            <p> <span class="new-price">{{getPrice | formatPrice}}</span>
+              <span class="book-rate">{{book.rating}}折</span>
+            </p>
+            <p>定价
+              <span class="old-price">{{book.price | formatPrice}}</span>
+            </p>
+          </div>
+    
+          <div class="book-num">
+            <p>数量：
+              <el-input-number
+                v-model="buyNum"
+                size="small"
+                :min="1"
+                :max="book.stock"
+              ></el-input-number>
+              （库存{{book.stock}}件）
+            </p>
+          </div>
+          <div class="button">
+            <el-button type="danger" @click="add_to_cart"> <i class="el-icon-shopping-cart-2"></i> 加入购物车</el-button>
+            <el-button
+              type="danger"
+              plain
+            ><i class="el-icon-goods"></i> 立即购买</el-button>
+          </div>
+        </el-col>
+      </el-row>
+    
+      <el-tabs class="book-card">
+        <el-tab-pane label="图书详情">
+          <p> 图书简介：{{book.description}}</p>
+        </el-tab-pane>
+        <el-tab-pane label="图书评论">
+          <p>
+            placeholder
           </p>
-          <p>定价
-            <span class="old-price">{{book.price | formatPrice}}</span>
-          </p>
-        </div>
-
-        <div class="book-num">
-          <p>数量：
-            <el-input-number
-              v-model="buyNum"
-              size="small"
-              :min="1"
-              :max="book.stock"
-            ></el-input-number>
-            （库存{{book.stock}}件）
-          </p>
-        </div>
-        <div class="button">
-          <el-button type="danger"> <i class="el-icon-shopping-cart-2"></i> 加入购物车</el-button>
-          <el-button
-            type="danger"
-            plain
-          ><i class="el-icon-goods"></i> 立即购买</el-button>
-        </div>
-      </el-col>
-    </el-row>
-
-    <el-tabs class="book-card">
-      <el-tab-pane label="图书详情">
-        <p> 图书简介：{{book.description}}</p>
-      </el-tab-pane>
-      <el-tab-pane label="图书评论">
-        <p>
-          placeholder
-        </p>
-      </el-tab-pane>
-    </el-tabs>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
   </div>
 </template>
 
@@ -84,6 +86,7 @@ export default {
   data() {
     return {
       key: "",
+      is_loading: true,
       book: {
         "name": "寻找《局外人》",
         "cover": "s33658199.jpg",
@@ -109,7 +112,7 @@ export default {
     }
   },
   mounted() {
-    this.key = this.$route.params.id
+    this.update()
   },
   watch: {
     $route(to) {
@@ -118,7 +121,23 @@ export default {
     },
   },
   methods: {
+    add_to_cart() {
+      console.log("add", this.book.id, this.buyNum)
+      this.$http.put("/api/cart", {id: this.book.id, count: this.buyNum})
+        .then((response) => {
+          this.$message("add success")
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.update())
+    },
     update() {
+      this.is_loading = true
       this.$http.get("/api/book/" + this.$route.params.id)
         .then((response) => {
           Object.assign(this.book, response.data)
@@ -131,6 +150,7 @@ export default {
             message: error
           })
         })
+        .finally(() => this.is_loading = false)
     }
   },
 }
