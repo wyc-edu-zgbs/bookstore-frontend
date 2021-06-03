@@ -35,7 +35,6 @@
       :row-style="{height: '40px'}"
     >
       <!--这里不知道要不要把商品名单大小写死-->
-      <el-table-column type="selection" />
       <el-table-column>
         <template v-slot:default="scope">
           <el-image
@@ -56,29 +55,11 @@
           {{scope.row.price | formatPrice}}
         </template>
       </el-table-column>
-      <el-table-column label="数量">
-        <template v-slot:default="scope">
-          <el-input-number
-            v-model="scope.row.count"
-            :min="1"
-            size="small"
-          ></el-input-number>
-        </template>
+      <el-table-column label="数量" prop="count">
       </el-table-column>
       <el-table-column label="合计">
         <template slot-scope="scope">
           {{scope.row.price * scope.row.count | formatPrice}}
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template v-slot:default="scope">
-          <el-button
-            size="small"
-            type="danger"
-            @click.native.prevent="deleteRow(scope.$index)"
-          >
-            删除
-          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -133,7 +114,6 @@ export default {
   },
   data() {
     return {
-      selection: [],
       items: [
         {
           "count": 7,

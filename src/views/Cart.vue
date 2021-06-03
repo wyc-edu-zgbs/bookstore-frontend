@@ -78,6 +78,7 @@
         <el-button
           class="check-button"
           type="text"
+          :disabled="selection.length == 0"
           plain
           @click="checkout()"
         >结 算</el-button>
@@ -107,6 +108,21 @@ export default {
       this.$http.get("/api/cart")
         .then((response) => {
           this.items = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.is_loading = false)
+    },
+    checkout() {
+      this.is_loading = true
+      this.$http.post("/api/checkout", this.selection.map(i=>i.id))
+        .then((response) => {
+          this.$router.push("/orderconfirm/"+response.id)
         })
         .catch((error) => {
           console.log(error)

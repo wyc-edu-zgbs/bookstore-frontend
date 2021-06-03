@@ -94,7 +94,7 @@ const routes = [
 
   },
   {
-    path:'/orderconfirm',
+    path:'/orderconfirm/:id',
     name:'OrderConfirm',
     component:()=> import('../views/OrderConfirm.vue')
   }
