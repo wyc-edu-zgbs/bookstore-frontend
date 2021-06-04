@@ -6,10 +6,10 @@
     </h1>
     <div>
       <el-table
+        class="cart-table"
         stripe
         ref="table"
         :data="items"
-        height="500"
         :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
         @selection-change="(x)=>{this.selection=x}"
       >
@@ -165,13 +165,12 @@ export default {
   font-size: 130%;
   background-color: white;
 }
-</style>
-
-<style>
-.el-checkbox__inner {
+.cart-table >>> .el-checkbox__inner {
   border-color: rgba(58, 130, 119, 0.7);
   width: 16px;
   height: 16px;
 }
 </style>
+
+
 

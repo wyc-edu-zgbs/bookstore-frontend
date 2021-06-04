@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div class="header_nav">
-      <p id="title">header text</p>
+      <p id="title">小型网上书店</p>
       <ul>
         <li v-if="!userInfo.id">
           <router-link to="/login">您好,请登录</router-link>

@@ -59,10 +59,6 @@ const routes = [
         component: ()=> import('../views/PersonalInfo/Children/Profile.vue')
       },
       {
-        path:'edit',
-        component: ()=> import('../views/PersonalInfo/Children/Edit.vue')
-      },
-      {
         path:'addr',
         component: ()=> import('../views/PersonalInfo/Children/Addr.vue')
       },

@@ -32,7 +32,7 @@
         type="text"
         size="small"
       ><i class="el-icon-remove-outline"></i> 删除</el-button>
-      
+
       <el-button
         type="text"
         class="addr-button"
@@ -45,7 +45,7 @@
       :visible.sync="dialogFormVisible"
       :addr="form"
       @updateaddr="updateaddr($event)"
-      ></AddrDialog>
+    ></AddrDialog>
 
   </el-card>
 </template>
@@ -101,10 +101,9 @@ export default {
  <style scoped>
 .addr-card {
   text-align: left;
-  width: 30%;
-  height: 55%;
   background: rgb(255, 255, 255);
   font-size: 0.9vw;
+  margin: 3%;
   border-radius: 5%;
   border-width: 0.2vw;
   border-color: rgba(91, 155, 148, 0.3);

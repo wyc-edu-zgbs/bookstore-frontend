@@ -1,6 +1,6 @@
 <template>
-  <el-container style="height: 100%;">
-    <el-aside width="15vw">
+  <el-container>
+    <el-aside>
       <!--
             <img v-if="userInfo.user_avatar" :src="userInfo.user_avatar" class="navbar-brand-img mx-auto">
             <img v-else src="./images/no_login.jpg" class="navbar-brand-img mx-auto">
@@ -15,40 +15,21 @@
           <span slot="title">我的资料</span>
         </el-menu-item>
 
-        <el-submenu index="2">
-          <template slot="title">
-            <i class="el-icon-edit"></i>
-            <span>编辑信息</span>
-          </template>
-
-          <el-menu-item-group>
-            <el-menu-item
-              index="2-1"
-              @click="goTo('/personinfo/update')"
-            >修改基本信息</el-menu-item>
-            <el-menu-item
-              index="2-2"
-              @click="goTo('/personinfo/editpwd')"
-            >修改密码</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-
         <el-menu-item
-          index="3"
+          index="2"
           @click="goTo('/personinfo/addr')"
         >
           <i class="el-icon-location"></i>
           <span slot="title">收货地址</span>
         </el-menu-item>
 
-                <el-menu-item
-          index="4"
+        <el-menu-item
+          index="3"
           @click="goTo('/personinfo/myorder')"
         >
           <i class="el-icon-s-order"></i>
           <span slot="title">我的订单</span>
         </el-menu-item>
-        
 
       </el-menu>
 
@@ -75,9 +56,13 @@ export default
 .el-aside {
   background-color: rgba(91, 155, 148, 0.3);
   display: block;
-  height: 60vh;
+  height: 70vh;
   position: relative;
+  border-width: 0.2vw;
+  border-style: solid;
+  border-color: rgba(91, 155, 148, 0.7);
 }
+
 .el-main {
   padding: 0 2%;
 }

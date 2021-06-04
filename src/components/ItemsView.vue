@@ -1,14 +1,24 @@
 <template>
   <div class="item-container">
-    <el-radio-group v-model="sort_key" @change="selectSort">
-      <el-radio-button label="sort_default">default</el-radio-button>
-      <el-radio-button label="price_desc"></el-radio-button>
-      <el-radio-button label="price_asc"></el-radio-button>
-      <el-radio-button label="rating_desc"></el-radio-button>
-      <el-radio-button label="rating_asc"></el-radio-button>
+    <el-radio-group
+      v-model="sort_key"
+      @change="selectSort"
+      id="radio"
+      fill="grey"
+    >
+      <el-radio-button label="默认排序"></el-radio-button>
+      <el-radio-button label="price_desc">价格 <i class="el-icon-bottom"></i></el-radio-button>
+      <el-radio-button label="price_asc">价格 <i class="el-icon-top"></i></el-radio-button>
+      <el-radio-button label="rating_desc">评分 <i class="el-icon-bottom"></i></el-radio-button>
+      <el-radio-button label="rating_asc">评分 <i class="el-icon-top"></i></el-radio-button>
+      <el-radio-button label="rating_desc">销量 <i class="el-icon-bottom"></i></el-radio-button>
+      <el-radio-button label="rating_asc">销量 <i class="el-icon-top"></i></el-radio-button>
     </el-radio-group>
     <div class="result">
-      <div v-if="product_rows" :key="$route.fullPath">
+      <div
+        v-if="product_rows"
+        :key="$route.fullPath"
+      >
         <el-row
           v-for="product_row in product_rows"
           :key="product_row.map(x=>x.id).join()"
@@ -165,11 +175,18 @@ export default {
 </script>
 
 <style scoped>
+.el-radio-group {
+  margin: 1vh 0 0 1vw;
+}
+#radio >>> .el-radio-button__inner {
+  background-color: rgba(247, 244, 244, 0.7);
+}
 .el-pagination {
   text-align: center;
 }
 .result {
-  padding: 2% 3%;
+  padding: 2% 0;
   background: rgba(255, 255, 255, 0.5);
 }
 </style>
+
