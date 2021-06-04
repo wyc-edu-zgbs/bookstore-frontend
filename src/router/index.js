@@ -65,6 +65,10 @@ const routes = [
       {
         path:'myorder',
         component:()=>import('../views/PersonalInfo/Children/Sales.vue')
+      },
+      {
+        path:'changepw',
+        component:()=>import('../views/PersonalInfo/Children/ChangePw.vue')
       }
     ]
   },

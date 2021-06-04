@@ -17,6 +17,14 @@
 
         <el-menu-item
           index="2"
+          @click="goTo('/personinfo/changepw')"
+        >
+          <i class="el-icon-edit"></i>
+          <span slot="title">修改密码</span>
+        </el-menu-item>
+
+        <el-menu-item
+          index="3"
           @click="goTo('/personinfo/addr')"
         >
           <i class="el-icon-location"></i>
@@ -24,7 +32,7 @@
         </el-menu-item>
 
         <el-menu-item
-          index="3"
+          index="4"
           @click="goTo('/personinfo/myorder')"
         >
           <i class="el-icon-s-order"></i>
