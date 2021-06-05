@@ -10,21 +10,23 @@
             请选择收货地址
             </span>
         </el-header>
-        <el-main>
-                  <AddrItem :editable="false"></AddrItem>
 
-        </el-main>
-
+<!--
     <el-row>
       <el-col
         :span="6"
         v-for="k in [1,2,3]"
         :key="k"
       >
-        <AddrItem></AddrItem>
+        <AddrItem :editable="false"></AddrItem>
       </el-col>
     </el-row>
-
+-->
+  <el-radio-group v-model="radio">
+    <el-radio :label="3"> <AddrItem :editable="false"></AddrItem></el-radio>
+    <el-radio :label="6"> <AddrItem :editable="false"></AddrItem></el-radio>
+    <el-radio :label="9"> <AddrItem :editable="false"></AddrItem></el-radio>
+  </el-radio-group>
     <!--  </el-container>-->
     <el-header>
       <span>
@@ -139,6 +141,7 @@ export default {
   },
   data() {
     return {
+      radio:3,
       selection: [],
       items: [
         {

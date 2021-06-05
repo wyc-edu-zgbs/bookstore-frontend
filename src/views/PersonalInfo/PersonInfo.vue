@@ -1,12 +1,12 @@
 <template>
   <el-container>
-    <el-aside>
+    <el-aside style="width:250px">
       <!--
             <img v-if="userInfo.user_avatar" :src="userInfo.user_avatar" class="navbar-brand-img mx-auto">
             <img v-else src="./images/no_login.jpg" class="navbar-brand-img mx-auto">
             不知道有没有头像 先这么写了-->
 
-      <el-menu :unique-opened="true">
+      <el-menu :unique-opened="true" >
         <el-menu-item
           index="1"
           @click="goTo('/personinfo/profile')"

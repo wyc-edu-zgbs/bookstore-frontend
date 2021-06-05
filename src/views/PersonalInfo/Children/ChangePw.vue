@@ -1,5 +1,5 @@
 <template>
-    <el-card>
+    <el-card style="width:80%">
       <div class="logo"><img
           src="../../../assets/bread.png"
           alt="bread"
@@ -7,17 +7,17 @@
         ></div>
          <el-container>
       <el-main class="main1">
-      <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="100px" class="login_form">
+      <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="100px" class="login_form" style="margin-left:50px">
 
 
-        <el-form-item label="原密码" prop="password" >
+        <el-form-item label="原密码" prop="password" style="width:70%">
           <el-input v-model="loginForm.oldpassword" prefix-icon="el-icon-lock"  type="password" placeholder="请输入原密码">
 
           </el-input>
 
         </el-form-item>
 
-        <el-form-item label="新密码" prop="password" v-if="visible">
+        <el-form-item label="新密码" prop="password" v-if="visible" style="width:70%">
           <el-input v-model="loginForm.password" prefix-icon="el-icon-lock"  type="password" placeholder="密码必须介于6-20个字符之间">
             <i slot="suffix" title="显示密码" @click="changePass" style="cursor:pointer;"
                class="el-icon-view"></i>
@@ -27,7 +27,7 @@
                class="el-icon-view"></i>
           </el-input>
         </el-form-item>
-        <el-form-item label="新密码" prop="password" v-else>
+        <el-form-item label="新密码" prop="password" v-else style="width:70%">
           <el-input v-model="loginForm.password" prefix-icon="el-icon-lock" type="text" placeholder="密码应介于6-20个字符之间" >
             <i slot="suffix" title="隐藏密码" @click="changePass" style="cursor:pointer;"
                class="el-icon-more"></i>
@@ -38,7 +38,7 @@
           </el-input>
         </el-form-item>
 
-        <el-form-item class="btns">
+        <el-form-item class="btns" >
           <el-button type="primary" @click="submitForm" style="width:300px">提交</el-button>
         </el-form-item>
       </el-form>
@@ -172,18 +172,20 @@ export default {
 .return {
   margin: 0 0 2% 4%;
 }
+/*
 .el-card {
   width: 80%;
   margin: auto;
   padding: 0 7% 0 0;
   background-color: rgba(248, 224, 157, 0.4);
 }
+*/
 .logo {
   position: relative;
   margin: 2% 0 6% 38%;
 }
 .img {
-  width: 70%;
+  width: 30%;
 }
 .el-form-item {
   padding: 1%;
