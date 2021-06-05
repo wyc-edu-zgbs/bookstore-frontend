@@ -46,23 +46,37 @@
           </p>
         </div>
 
-        <div class="book-num">
-          <p>数量：
-            <el-input-number
-              v-model="buyNum"
-              size="small"
-              :min="1"
-              :max="book.stock"
-            ></el-input-number>
-            （库存{{book.stock}}件）
-          </p>
+        <div v-if="$cookies.get('role')=='admin'">
+          <div class="button">
+            <router-link :to="'/admin'+$route.path">
+              <el-button type="danger" icon="el-icon-edit">
+                编辑
+              </el-button>
+            </router-link>
+          </div>
         </div>
-        <div class="button">
-          <el-button type="danger"> <i class="el-icon-shopping-cart-2"></i> 加入购物车</el-button>
-          <el-button
-            type="danger"
-            plain
-          ><i class="el-icon-goods"></i> 立即购买</el-button>
+        <div v-else>
+          <div class="book-num">
+            <p>数量：
+              <el-input-number
+                v-model="buyNum"
+                size="small"
+                :min="1"
+                :max="book.stock"
+              ></el-input-number>
+              （库存{{book.stock}}件）
+            </p>
+          </div>
+          <div class="button">
+            <el-button type="danger" @click="add_to_cart">
+              <i class="el-icon-shopping-cart-2"></i> 加入购物车</el-button>
+            <!--
+            <el-button
+              type="danger"
+              plain
+            ><i class="el-icon-goods"></i> 立即购买</el-button>
+            -->
+          </div>
         </div>
       </el-col>
     </el-row>

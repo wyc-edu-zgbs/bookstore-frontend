@@ -7,6 +7,10 @@ import router from './router'
 import store from './store'
 
 Vue.use(ElementUI);
+
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
 Vue.config.productionTip = false
 
 import AxiosPlugin from './utils/AxiosPlugin.js'

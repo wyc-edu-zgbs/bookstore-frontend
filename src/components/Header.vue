@@ -3,15 +3,16 @@
     <div class="header_nav">
       <p id="title">小型网上书店</p>
       <ul>
-        <li v-if="!userInfo.id">
-          <router-link to="/login">您好,请登录</router-link>
-        </li>
-        <li v-else>
-          <a v-if="userInfo.user_nickname">您好,{{ userInfo.user_nickname }}</a>
+        <li v-if="$cookies.get('role')">
           <a @click="logout">退出登录</a>
         </li>
+        <li v-else>
+          <router-link to="/login">您好,请登录</router-link>
+        </li>
         <li>
-          <router-link to="/personinfo/profile"><i class="el-icon-user-solid"></i>个人中心</router-link>
+          <router-link to="/admin/orderupdate" v-if="$cookies.get('role')=='admin'">
+            <i class="el-icon-s-tools"></i>平台管理</router-link>
+          <router-link to="/personinfo/profile" v-else><i class="el-icon-user-solid"></i>个人中心</router-link>
         </li>
         <li>
           <router-link to="/cart"><i class="el-icon-shopping-cart-2"></i>我的购物车</router-link>
@@ -24,14 +25,22 @@
 
 <script>
 export default {
-  data() {
-    return {
-      userInfo: {}
-    }
-  },
   methods: {
     logout() {
-      console.log("logout")
+      this.$http.post("/api/logout")
+        .then((response) => {
+          if (response.data.detail) {
+            this.$message(response.data.detail)
+          }
+          this.$router.go()
+        })
+        .catch(error => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
     }
   }
 }
