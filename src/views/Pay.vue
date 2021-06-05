@@ -8,7 +8,7 @@
 export default {
 	data() {
 		return {
-			is_loading: true,
+			is_loading: false,
 		}
 	},
 	methods: {
@@ -35,3 +35,10 @@ export default {
 	}
 }
 </script>
+
+<style>
+.payment-container {
+	text-align: center;
+	padding: 30% 0;
+}
+</style>
