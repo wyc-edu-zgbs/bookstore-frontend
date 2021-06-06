@@ -1,12 +1,12 @@
 <template>
   <el-container>
-    <el-aside>
+    <el-aside style="width:250px">
       <!--
             <img v-if="userInfo.user_avatar" :src="userInfo.user_avatar" class="navbar-brand-img mx-auto">
             <img v-else src="./images/no_login.jpg" class="navbar-brand-img mx-auto">
             不知道有没有头像 先这么写了-->
 
-      <el-menu :unique-opened="true">
+      <el-menu :unique-opened="true" >
         <el-menu-item
           index="1"
           @click="goTo('/personinfo/profile')"
@@ -17,6 +17,14 @@
 
         <el-menu-item
           index="2"
+          @click="goTo('/personinfo/changepw')"
+        >
+          <i class="el-icon-edit"></i>
+          <span slot="title">修改密码</span>
+        </el-menu-item>
+
+        <el-menu-item
+          index="3"
           @click="goTo('/personinfo/addr')"
         >
           <i class="el-icon-location"></i>
@@ -24,7 +32,7 @@
         </el-menu-item>
 
         <el-menu-item
-          index="3"
+          index="4"
           @click="goTo('/personinfo/myorder')"
         >
           <i class="el-icon-s-order"></i>

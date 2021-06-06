@@ -6,23 +6,18 @@
     </h1>
     <!--   <el-container>-->
     <p>
-      请选择收货地址
+    请选择收货地址
     </p>
 
-    <el-row v-loading="addr_loading">
-      <el-col
-        :span="8"
-        v-for="addr in addresses.addresses"
-        :key="addr.id"
-        >
+    <el-radio-group v-model="addr" v-loading="addr_loading">
+      <el-radio v-for="addr in addresses.addresses" :key="addr.id" :label="addr.id">
         <AddrItem
           :form="addr"
           :isDefault="addr.id == addresses.default"
-          :editable="true"
+          :editable="false"
           ></AddrItem>
-      </el-col>
-    </el-row>
-
+      </el-radio>
+    </el-radio-group>
     <!--  </el-container>-->
     <el-header>
       <span>
@@ -37,7 +32,7 @@
       height="400"
       :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
       :row-style="{height: '40px'}"
-    >
+      >
       <!--这里不知道要不要把商品名单大小写死-->
       <el-table-column>
         <template v-slot:default="scope">
@@ -47,13 +42,13 @@
             fit="contain"
             lazy
             style="width:60px;height:80px"
-          ></el-image>
+            ></el-image>
         </template>
       </el-table-column>
       <el-table-column
         prop="name"
         label="图书信息"
-      ></el-table-column>
+        ></el-table-column>
       <el-table-column label="单价">
         <template v-slot:default="scope">
           {{scope.row.price | formatPrice}}
@@ -73,7 +68,7 @@
       <el-card
         shadow="always"
         class="card-foot"
-      >
+        >
         <span>
           寄送至：xx省xx市xx区 xxx
           收件人：xxx
@@ -88,7 +83,7 @@
           type="text"
           plain
           @click="pay()"
-        >去支付</el-button>
+          >去支付</el-button>
       </el-card>
 
     </div>
@@ -139,7 +134,7 @@ export default {
       var data = {
         id: this.$route.params.id,
         state: 1,
-        address: "<uuid>"
+        address: this.addr
       }
       this.$http.post("/api/order", data)
         .then((response) => {
@@ -166,6 +161,7 @@ export default {
         default: "",
         addresses: []
       },
+      addr: "",
       order: {
         price: 123.45,
         items: [
