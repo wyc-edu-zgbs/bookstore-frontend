@@ -247,5 +247,6 @@ export default {
   width: 70.3%;
   position: fixed;
   bottom: 0;
+  z-index: 1500;
 }
 </style>
