@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container v-loading="is_loading">
     <el-header>
       <span id="title">个人资料管理</span>
     </el-header>
@@ -15,6 +15,21 @@
           :src="userInfo.avatar"
           style="margin-right: 20px"
         ></el-avatar>
+        <el-upload
+          class="changepic"
+          action="/api/changeavatar"
+          ref="upload"
+          :limit="1"
+          :show-file-list="false"
+          :on-success="()=>$router.go()"
+          :on-error="(error)=> $notify({
+            title: 'Could not reach the API.',
+            message: error
+          })"
+          >
+          <el-button slot="trigger" size="small" type="primary">选择</el-button>
+          <div class="el-upload__tip" slot="tip">小于 500kb</div>
+        </el-upload>
         <!--
                     <el-button @click.native="changepic()" class="changepic" type="info" plain>
                         <i class="el-icon-edit"></i><span>修改头像</span>
@@ -23,9 +38,7 @@
 
       </div>
       <div class="message">
-        <p>ID: {{userInfo.id}}</p>
-
-        <p>用户名: {{userInfo.username}}</p>
+        <p>Email: {{userInfo.username}}</p>
 
         <p v-if="userInfo.nickname !== null">昵称: {{userInfo.nickname}} <el-link
             @click.native="dialog6 = true"
@@ -40,235 +53,9 @@
             icon="el-icon-edit"
             style="margin-bottom: 2.8px"
           >马上填写</el-link>您的昵称，让更多的人了解你</p>
-
-        <p v-if="userInfo.gender !== null">性别: {{userInfo.gender == 0 ? '男' : '女'}}
-          <el-link
-            @click.native="dialog1 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          ></el-link>
-        </p>
-
-        <p v-else>性别: <el-link
-            @click.native="dialog1 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          >马上填写</el-link>您的性别，让更多的人了解你</p>
-
-        <p v-if="userInfo.age !== null">年龄: {{userInfo.age}} <el-link
-            @click.native="dialog2 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          ></el-link>
-        </p>
-        <p v-else>年龄: <el-link
-            @click.native="dialog2 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          >马上填写</el-link>您的年龄，让更多的人了解你</p>
-
-        <p>电话: {{userInfo.phone}} <el-link
-            @click.native="dialog5 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          ></el-link>
-        </p>
-        <p v-if="userInfo.qq !== null">QQ: {{userInfo.qq}} <el-link
-            @click.native="dialog3 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          ></el-link>
-        </p>
-        <p v-else>QQ: <el-link
-            @click.native="dialog3 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          >马上填写</el-link>您的QQ，让更多的人了解你</p>
-
-        <p>邮箱: {{userInfo.email}}</p>
-        <p v-if="userInfo.address !== null">地址: {{userInfo.address}} <el-link
-            @click.native="dialog4 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          ></el-link>
-        </p>
-        <p v-else>地址: <el-link
-            @click.native="dialog4 = true"
-            type="primary"
-            icon="el-icon-edit"
-            style="margin-bottom: 2.8px"
-          >马上填写</el-link>您的地址，让更多的人了解你</p>
       </div>
+
     </el-card>
-
-    <el-dialog
-      title="提示"
-      :visible.sync="dialog1"
-      width="30%"
-    >
-      <div style="margin-bottom: 20px">
-        <span>您的性别:</span>
-      </div>
-      <el-form
-        ref="genderFormRef"
-        :model="genderForm"
-        label-width="0px"
-        class="gender_form"
-      >
-        <el-form-item prop="gender">
-          <el-input
-            placeholder="gender:"
-            v-model="genderForm.gender"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button @click="dialog1 = false">取 消</el-button>
-        <el-button
-          type="primary"
-          @click.native="gender()"
-        >确 定</el-button>
-      </span>
-    </el-dialog>
-    <el-dialog
-      title="提示"
-      :visible.sync="dialog2"
-      width="30%"
-    >
-      <div style="margin-bottom: 20px">
-        <span>您的年龄:</span>
-      </div>
-      <el-form
-        ref="ageFormRef"
-        :model="ageForm"
-        label-width="0px"
-        class="age_form"
-      >
-        <el-form-item prop="age">
-          <el-input
-            placeholder="age:"
-            v-model="ageForm.age"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button @click="dialog2 = false">取 消</el-button>
-        <el-button
-          type="primary"
-          @click.native="age()"
-        >确 定</el-button>
-      </span>
-    </el-dialog>
-    <el-dialog
-      title="提示"
-      :visible.sync="dialog3"
-      width="30%"
-    >
-      <div style="margin-bottom: 20px">
-        <span>您的QQ:</span>
-      </div>
-      <el-form
-        ref="qqFormRef"
-        :model="qqForm"
-        label-width="0px"
-        class="qq_form"
-      >
-        <el-form-item prop="qq">
-          <el-input
-            placeholder="qq:"
-            v-model="qqForm.qq"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button @click="dialog3 = false">取 消</el-button>
-        <el-button
-          type="primary"
-          @click.native="qq()"
-        >确 定</el-button>
-      </span>
-    </el-dialog>
-    <el-dialog
-      title="提示"
-      :visible.sync="dialog4"
-      width="30%"
-    >
-      <div style="margin-bottom: 20px">
-        <span>您的地址:</span>
-      </div>
-      <el-form
-        ref="addressFormRef"
-        :model="addressForm"
-        label-width="0px"
-        class="address_form"
-      >
-        <el-form-item prop="address">
-          <el-input
-            placeholder="address:"
-            v-model="addressForm.address"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button @click="dialog4 = false">取 消</el-button>
-        <el-button
-          type="primary"
-          @click.native="address()"
-        >确 定</el-button>
-      </span>
-    </el-dialog>
-    <el-dialog
-      title="提示"
-      :visible.sync="dialog5"
-      width="30%"
-    >
-      <div style="margin-bottom: 20px">
-        <span>您的电话:</span>
-      </div>
-      <el-form
-        ref="phoneFormRef"
-        :model="phoneForm"
-        label-width="0px"
-        class="phone_form"
-      >
-        <el-form-item prop="phone">
-          <el-input
-            placeholder="phone_num:"
-            v-model="phoneForm.phone"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <span
-        slot="footer"
-        class="dialog-footer"
-      >
-        <el-button @click="dialog5 = false">取 消</el-button>
-        <el-button
-          type="primary"
-          @click.native="phonenum()"
-        >确 定</el-button>
-      </span>
-    </el-dialog>
 
     <el-dialog
       title="提示"
@@ -309,47 +96,51 @@
 export default {
   data() {
     return {
-      dialog1: false,
-      dialog2: false,
-      dialog3: false,
-      dialog4: false,
-      dialog5: false,
+      is_loading: false,
       dialog6: false,
       userInfo:
       {
-        "phone": "13312345678",
-        "name": "xiaowoniu",
+        "email": "aa@bb",
         "nickname": "小蜗牛",
-        "gender": "女",
-        "age": "38",
-        "address": "北京"
-      },
-      genderForm: {
-        gender: ''
-      },
-      ageForm: {
-        age: ''
-      },
-      qqForm: {
-        qq: ''
-      },
-      addressForm: {
-        address: ''
-      },
-      phoneForm: {
-        phone: ''
       },
       nicknameForm: {
         nickname: ''
       }
-
     }
-
-
   },
-  /*
-  
-                  */
+  methods: {
+    update() {
+      this.is_loading = true
+      this.userInfo = {}
+      this.$http.get("/api/user")
+        .then((response) => {
+          this.userInfo = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.is_loading = false)
+    },
+    nickname() {
+      this.is_loading = true
+      this.$http.post("/api/user", {nickname: this.nicknameForm.nickname})
+        .then((response) => {
+          this.$router.go()
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.is_loading = false)
+    }
+  }
 }
 </script>
 <style   scoped>
