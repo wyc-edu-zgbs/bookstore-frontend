@@ -79,16 +79,12 @@ const routes = [
     children:
     [
       {
-        path:'goodsadd',
-        component:()=>import('../views/admin/Chlidren/GoodsAdd.vue')
+        path:'book',
+        component:()=>import('../views/admin/Chlidren/BookEdit.vue')
       },
       {
-        path:'goodsshow',
-        component:()=>import('../views/admin/Chlidren/GoodsShow.vue')
-      },
-      {
-        path:'goodsupdate',
-        component:()=>import('../views/admin/Chlidren/GoodsUpdate.vue')
+        path:'book/:id',
+        component:()=>import('../views/admin/Chlidren/BookEdit.vue')
       },
       {
         path:'orderupdate',

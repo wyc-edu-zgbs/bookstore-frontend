@@ -23,16 +23,8 @@
       </el-header>
       <el-menu :unique-opened="true">
         <el-menu-item
-          index="1"
-          @click="goTo('/admin/goodsshow')"
-        >
-          <i class="el-icon-document-copy"></i>
-          <span slot="title">商品信息</span>
-        </el-menu-item>
-
-        <el-menu-item
           index="2"
-          @click="goTo('/admin/goodsadd')"
+          @click="goTo('/admin/book')"
         >
           <i class="el-icon-circle-plus-outline"></i>
           <span slot="title">商品上架</span>
