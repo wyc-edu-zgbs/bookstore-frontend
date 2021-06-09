@@ -4,9 +4,8 @@
     <el-row>
       <el-col :span="5">
         <div class="logo"><img
-            src="../assets/bread.png"
-            alt="bread"
-            width="70%"
+            src="../assets/mylogo.png"
+            width="45%"
             class="img"
           ></div>
       </el-col>
@@ -78,7 +77,8 @@ export default {
 }
 
 .img {
-  margin-top: -20%;
+  margin-top: -18%;
+  margin-right: 55%;
 }
 .el-button {
   height: 45px;

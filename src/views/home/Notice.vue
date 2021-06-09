@@ -10,13 +10,17 @@
       >
         <span>公告</span>
       </div>
-      <div
-        v-for="note in notes"
-        :key="note"
-        class="note"
-      >
-        {{note}}
-      </div>
+      <ul>
+        <div
+          v-for="note in notes"
+          :key="note"
+          class="note"
+        >
+
+          <li>{{note}}</li>
+
+        </div>
+      </ul>
     </el-card>
   </div>
 </template>
@@ -25,7 +29,7 @@
 export default {
   data() {
     return {
-      notes: ["儿童节礼物季，爆款童书抢购", "618开门红，图书5折封顶"]
+      notes: ["夏日撒欢读，爆款童书抢购", "618开门红，图书5折封顶"]
     }
   },
 }
@@ -44,7 +48,11 @@ export default {
   margin: -4% 0;
 }
 .note {
-  font-size: 0.8vh;
+  font-size: 0.9vw;
   line-height: 3.5vh;
+}
+ul {
+  padding: 0 2px 0 0;
+  margin: 0;
 }
 </style>

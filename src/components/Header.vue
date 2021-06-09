@@ -10,12 +10,22 @@
           <router-link to="/login">您好,请登录</router-link>
         </li>
         <li>
-          <router-link to="/admin/orderupdate" v-if="$cookies.get('role')=='admin'">
-            <i class="el-icon-s-tools"></i>平台管理</router-link>
-          <router-link to="/personinfo/profile" v-else><i class="el-icon-user-solid"></i>个人中心</router-link>
+          <router-link
+            to="/admin/orderupdate"
+            v-if="$cookies.get('role')=='admin'"
+          >
+            <i class="el-icon-s-tools"></i>平台管理
+          </router-link>
+          <router-link
+            to="/personinfo/profile"
+            v-else
+          ><i class="el-icon-user-solid"></i>个人中心</router-link>
         </li>
         <li>
           <router-link to="/cart"><i class="el-icon-shopping-cart-2"></i>我的购物车</router-link>
+        </li>
+        <li>
+          <router-link to="/">返回首页</router-link>
         </li>
       </ul>
     </div>

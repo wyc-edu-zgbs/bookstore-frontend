@@ -9,7 +9,7 @@
     </el-button>
     <el-card>
       <div class="logo"><img
-          src="../assets/bread.png"
+          src="../assets/mylogo.png"
           alt="bread"
           class="img"
         ></div>
@@ -191,7 +191,6 @@ export default {
   width: 45%;
   margin: auto;
   padding: 0 7% 0 0;
-  background-color: rgba(248, 224, 157, 0.4);
 }
 .logo {
   position: relative;

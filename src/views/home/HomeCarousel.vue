@@ -4,6 +4,7 @@
       trigger="click"
       height="40vh"
       class="car"
+      interval="2000"
     >
       <el-carousel-item
         v-for="item in images"
