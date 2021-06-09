@@ -22,12 +22,18 @@
           <template
             slot="title"
             class="tt"
-          >{{item}}</template>
+          >
+          <router-link :to="'/category?cat='+item" class="menulink">
+            {{item}}
+          </router-link>
+          </template>
           <el-menu-item
-            v-for="(item,index) in menus[item]"
+            v-for="(subitem,index) in menus[item]"
             :key="index"
           >
-            {{item}}
+            <router-link :to="'/category?cat='+item+','+subitem" class="menulink">
+              {{subitem}}
+            </router-link>
           </el-menu-item>
         </el-submenu>
       </el-menu>
@@ -47,6 +53,10 @@ export default {
 </script>
 
 <style scoped>
+.menulink {
+  text-decoration: inherit;
+  color: inherit;
+}
 .header {
   margin: 0 -1px;
   font-size: 150%;

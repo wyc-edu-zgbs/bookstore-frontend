@@ -2,35 +2,31 @@
   <el-card
     class="product"
     shadow="hover"
-  >
+    >
     <router-link :to="'/book/' + product.id">
       <el-image
         :src="product.cover | media2url"
         class="pro_img"
         lazy
-      />
-      <p class="title">{{product.name}}</p>
-      <p class="author">{{product.author}}</p>
-      <span class="new-price">{{product.price | formatPrice}}</span>
-      <span class="old-price" v-if="product.original_price">
-        定价: {{product.original_price | formatPrice}}
-      </span>
-      <!-- <div class="button"> -->
-      <el-row
-        type="flex"
-        class="button"
-      >
-        <el-button
-          type="danger"
-          size="mini"
-        > <i class="el-icon-shopping-cart-2"></i> 加入购物车</el-button>
-        <el-button
-          type="danger"
-          plain
-          size="mini"
-        ><i class="el-icon-goods"></i> 立即购买</el-button>
-      </el-row>
+        />
+        <p class="title">{{product.name}}</p>
+        <p class="author">{{product.author}}</p>
+        <span class="new-price">{{product.price | formatPrice}}</span>
+        <span class="old-price" v-if="product.original_price">
+          定价: {{product.original_price | formatPrice}}
+        </span>
     </router-link>
+    <!-- <div class="button"> -->
+    <el-row
+      type="flex"
+      class="button"
+      >
+      <el-button
+        type="danger"
+        size="mini"
+        @click="add_to_cart"
+        > <i class="el-icon-shopping-cart-2"></i> 加入购物车</el-button>
+    </el-row>
   </el-card>
 
 </template>
@@ -42,6 +38,22 @@ export default {
       type: Object,
       required: true
     }
+  },
+  methods: {
+    add_to_cart() {
+      this.$http.put("/api/cart", {id: this.product.id, count: 1})
+        .then((response) => {
+          this.$message("add success")
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.update())
+    },
   }
 }
 

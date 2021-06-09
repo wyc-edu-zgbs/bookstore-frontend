@@ -10,24 +10,28 @@
     >
       <div>
         <el-avatar
+          v-if="userInfo.avatar"
           class="bigpic"
-          :size="200"
-          :src="userInfo.avatar"
+          :size="150"
+          :src="userInfo.avatar | media2url"
           style="margin-right: 20px"
+          fit="contain"
         ></el-avatar>
+        <i class="bigpic el-icon-user-solid" v-else></i>
+        <!-- TODO -->
         <el-upload
           class="changepic"
-          action="/api/changeavatar"
+          action="/api/upload"
           ref="upload"
           :limit="1"
           :show-file-list="false"
-          :on-success="()=>$router.go()"
+          :on-success="set_avatar"
           :on-error="(error)=> $notify({
             title: 'Could not reach the API.',
             message: error
           })"
           >
-          <el-button slot="trigger" size="small" type="primary">选择</el-button>
+          <el-button icon="el-icon-upload" slot="trigger" size="small" type="primary">选择</el-button>
           <div class="el-upload__tip" slot="tip">小于 500kb</div>
         </el-upload>
         <!--
@@ -38,9 +42,9 @@
 
       </div>
       <div class="message">
-        <p>Email: {{userInfo.username}}</p>
+        <p>Email: {{userInfo.email}}</p>
 
-        <p v-if="userInfo.nickname !== null">昵称: {{userInfo.nickname}} <el-link
+        <p v-if="userInfo.nickname">昵称: {{userInfo.nickname}} <el-link
             @click.native="dialog6 = true"
             type="primary"
             icon="el-icon-edit"
@@ -52,7 +56,7 @@
             type="primary"
             icon="el-icon-edit"
             style="margin-bottom: 2.8px"
-          >马上填写</el-link>您的昵称，让更多的人了解你</p>
+          >马上填写</el-link></p>
       </div>
 
     </el-card>
@@ -100,13 +104,16 @@ export default {
       dialog6: false,
       userInfo:
       {
-        "email": "aa@bb",
-        "nickname": "小蜗牛",
+        "email": "",
+        "nickname": "",
       },
       nicknameForm: {
         nickname: ''
       }
     }
+  },
+  mounted() {
+    this.update()
   },
   methods: {
     update() {
@@ -129,6 +136,22 @@ export default {
       this.is_loading = true
       this.$http.post("/api/user", {nickname: this.nicknameForm.nickname})
         .then((response) => {
+          this.$router.go()
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.is_loading = false)
+    },
+    set_avatar(response) {
+      this.is_loading = true
+      this.$http.post("/api/user", {avatar: response.id})
+        .then((response) => {
+          console.log(response)
           this.$router.go()
         })
         .catch((error) => {

@@ -117,9 +117,11 @@
           label="订单状态"
         >
           <template slot-scope="scope">
-            <span v-if='scope.row.state == 1'>已完成 </span>
-            <span v-if='scope.row.state == 2'>未发货 </span>
-            <span v-if='scope.row.state == 3'>已取消 </span>
+            <span v-if='scope.row.state == 0'>待确认</span>
+            <span v-if='scope.row.state == 1'>未付款</span>
+            <span v-if='scope.row.state == 2'>未发货</span>
+            <span v-if='scope.row.state == 3'>已完成</span>
+            <span v-if='scope.row.state == 255'>已取消</span>
           </template>
 
         </el-table-column>
@@ -217,6 +219,9 @@ export default {
           }
         ]
     }
+  },
+  mounted() {
+    this.update()
   },
   methods: {
     update() {

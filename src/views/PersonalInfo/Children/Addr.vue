@@ -131,7 +131,7 @@ export default {
             message: error
           })
         })
-        .finally(() => this.update())
+        .finally(() => {this.is_loading = false; this.update()})
     }
   }
 }

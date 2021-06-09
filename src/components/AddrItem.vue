@@ -7,17 +7,19 @@
     <div class="addr-header">
       <i class="el-icon-user-solid"></i>
       <span class="text-wrapper"> {{form.name}} </span>
-      <el-button
-        v-if="!isDefault"
-        type="text"
-        class="de-button"
-        @click="set_default"
-      > 设为默认地址</el-button>
-      <el-tag
-        v-else
-        type="warning"
-        style=" margin:-3%;float:right"
-      >默认地址</el-tag>
+      <span v-if="editable">
+        <el-button
+          v-if="!isDefault"
+          type="text"
+          class="de-button"
+          @click="set_default"
+        > 设为默认地址</el-button>
+        <el-tag
+          v-else
+          type="warning"
+          style=" margin:-3%;float:right"
+        >默认地址</el-tag>
+      </span>
 
     </div>
 
@@ -97,6 +99,7 @@ export default {
             message: error
           })
         })
+        .finally(() => this.is_loading = false);
     },
     remove() {
       this.is_loading = true
@@ -109,6 +112,7 @@ export default {
             message: error
           })
         })
+        .finally(() => this.is_loading = false);
     },
     set_default() {
       this.is_loading = true
@@ -121,6 +125,7 @@ export default {
             message: error
           })
         })
+        .finally(() => this.is_loading = false);
     }
   },
 }

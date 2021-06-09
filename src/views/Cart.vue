@@ -122,7 +122,7 @@ export default {
       this.is_loading = true
       this.$http.post("/api/checkout", this.selection.map(i=>i.id))
         .then((response) => {
-          this.$router.push("/orderconfirm/"+response.id)
+          this.$router.push("/orderconfirm/"+response.data.id)
         })
         .catch((error) => {
           console.log(error)

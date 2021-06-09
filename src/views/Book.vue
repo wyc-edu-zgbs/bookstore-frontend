@@ -26,9 +26,6 @@
             {{book.name}}
           </h1>
         </div>
-        <div class="book-subtitle">
-          <p>—— {{book.subtitle}}</p>
-        </div>
 
         <div class="book-publish">
           <p>作者：<span class="book-search">{{book.author}}</span></p>
@@ -38,11 +35,11 @@
 
         <div class="book-price">
           <p>抢购价 </p>
-          <p> <span class="new-price">{{getPrice | formatPrice}}</span>
+          <p> <span class="new-price">{{book.price | formatPrice}}</span>
             <span class="book-rate">{{book.rating}}折</span>
           </p>
           <p>定价
-            <span class="old-price">{{book.price | formatPrice}}</span>
+            <span class="old-price">{{book.original_price | formatPrice}}</span>
           </p>
         </div>
 
@@ -91,10 +88,13 @@
         </p>
         <p>{{book.description}}</p>
       </el-tab-pane>
-      <el-tab-pane label="图书评论">
-        <p>
-          placeholder
-        </p>
+      <el-tab-pane label="图书评论" lazy>
+        <iframe
+          class="comment"
+          frameborder="0"
+          :src="'/api/comment/'+book.id"
+          onload="javascript:(function(o){console.log('load');o.style.height=o.contentWindow.document.body.scrollHeight+'px';}(this));"
+          ></iframe>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -111,7 +111,6 @@ export default {
         "cover": "s33658199.jpg",
         "author": "[美]爱丽丝·卡普兰 ",
         "press": "新星出版社 ",
-        "subtitle": "加缪与一部文学经典的命运 ",
         "date": "2020-6 ",
         "stock": 5,
         "pages": 360,
@@ -159,7 +158,8 @@ export default {
       this.is_loading = true
       this.$http.get("/api/book/" + this.$route.params.id)
         .then((response) => {
-          Object.assign(this.book, response.data)
+          //Object.assign(this.book, response.data)
+          this.book = response.data
           this.key = this.$route.params.id
         })
         .catch((error) => {
@@ -176,6 +176,10 @@ export default {
 </script>
 
 <style scoped>
+iframe.comment {
+  width: 100%;
+}
+
 .book-container {
   padding: 3%;
 }

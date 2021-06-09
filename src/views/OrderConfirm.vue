@@ -70,10 +70,6 @@
         class="card-foot"
         >
         <span>
-          寄送至：xx省xx市xx区 xxx
-          收件人：xxx
-        </span>
-        <span>
           共计:
           {{order.price | formatPrice}}
         </span>
@@ -163,51 +159,8 @@ export default {
       },
       addr: "",
       order: {
-        price: 123.45,
-        items: [
-          {
-            "count": 7,
-            "id": "ad727512-bd80-11eb-a8b8-c1e635d27859",
-            "name": "寻找《局外人》",
-            "cover": "s33658199.jpg",
-            "price": 98.0
-          },
-          {
-            "count": 9,
-            "id": "ad727513-bd80-11eb-a8b8-c1e635d27859",
-            "name": "不要和你妈争辩",
-            "cover": "s33610259.jpg",
-            "price": 39.8
-          },
-          {
-            "count": 5,
-            "id": "ad727514-bd80-11eb-a8b8-c1e635d27859",
-            "name": "鞋带",
-            "cover": "s33601424.jpg",
-            "price": 45
-          },
-          {
-            "count": 6,
-            "id": "ad727515-bd80-11eb-a8b8-c1e635d27859",
-            "name": "正常人",
-            "cover": "s33684681.jpg",
-            "price": 49.8
-          },
-          {
-            "count": 9,
-            "id": "ad727516-bd80-11eb-a8b8-c1e635d27859",
-            "name": "光明共和国",
-            "cover": "s33625558.jpg",
-            "price": 46
-          },
-          {
-            "count": 2,
-            "id": "ad727517-bd80-11eb-a8b8-c1e635d27859",
-            "name": "往复书简：初恋与不伦",
-            "cover": "s33668217.jpg",
-            "price": 42.0
-          }
-        ]
+        price: 0.0,
+        items: [ ]
       }
     }
   }

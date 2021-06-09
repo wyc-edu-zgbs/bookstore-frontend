@@ -1,7 +1,9 @@
 <template>
   <div class="header-container">
     <div class="header_nav">
-      <p id="title">小型网上书店</p>
+      <router-link to="/">
+        <p id="title">小型网上书店</p>
+      </router-link>
       <ul>
         <li v-if="$cookies.get('role')">
           <a @click="logout">退出登录</a>
@@ -15,7 +17,10 @@
           <router-link to="/personinfo/profile" v-else><i class="el-icon-user-solid"></i>个人中心</router-link>
         </li>
         <li>
-          <router-link to="/cart"><i class="el-icon-shopping-cart-2"></i>我的购物车</router-link>
+          <router-link to="/admin/book" v-if="$cookies.get('role')=='admin'">
+            <i class="el-icon-document-add"></i>书籍上新
+          </router-link>
+          <router-link to="/cart" v-else><i class="el-icon-shopping-cart-2"></i>我的购物车</router-link>
         </li>
       </ul>
     </div>
@@ -47,6 +52,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: inherit;
+}
 .header_nav {
   position: fixed;
   z-index: 1500;

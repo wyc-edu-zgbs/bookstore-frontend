@@ -117,9 +117,11 @@
           label="订单状态"
         >
           <template slot-scope="scope">
-            <span v-if='scope.row.state == 1'>已完成 </span>
-            <span v-if='scope.row.state == 2'>未发货 </span>
-            <span v-if='scope.row.state == 3'>已取消 </span>
+            <span v-if='scope.row.state == 0'>待确认</span>
+            <span v-if='scope.row.state == 1'>未付款</span>
+            <span v-if='scope.row.state == 2'>未发货</span>
+            <span v-if='scope.row.state == 3'>已完成</span>
+            <span v-if='scope.row.state == 255'>已取消</span>
           </template>
 
         </el-table-column>
@@ -262,6 +264,9 @@ export default {
         ],
     }
   },
+  mounted() {
+    this.update()
+  },
   methods:
   {
     update() {
@@ -286,8 +291,7 @@ export default {
         cancelButtonText: '取消',
         type: 'success'
       }).then(() => {
-        this.id = order_id
-        this.submitpush();
+        this.submitpush(order_id);
       });
     },
     delorder(order_id) {
@@ -296,8 +300,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.id = order_id
-        this.submitdel();
+        this.submitdel(order_id);
       });
     },
     submitdel(order_id) {
@@ -311,7 +314,7 @@ export default {
     },
     change_state(order_id, state) {
       this.is_loading = true
-      this.$http.post("/api/order", {id: order_id, status: state})
+      this.$http.post("/api/order", {id: order_id, state: state})
         .then((response) => {
           this.$router.go()
         })

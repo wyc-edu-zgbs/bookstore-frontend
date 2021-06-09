@@ -4,7 +4,7 @@
       <div>
         <el-upload
           class="avatar-uploader"
-          action="/api/imgupload"
+          action="/api/upload"
           :show-file-list="false"
           :on-success="handle_cover">
           <img v-if="book.cover" :src="book.cover | media2url" class="avatar">
@@ -21,17 +21,6 @@
           v-model="book.name"
           clearable
           style="width:350px"
-        >
-        </el-input>
-      </div>
-      <div class="goods-item">
-        <span>副标题</span>
-        <el-input
-          type="text"
-          placeholder="请输入内容"
-          v-model="book.subtitle"
-          clearable
-          style="width:100px"
         >
         </el-input>
       </div>
@@ -110,7 +99,7 @@
         <span>评分</span>
         <el-input
           type="number"
-          v-model="book.pages"
+          v-model="book.score"
           clearable
           style="width:100px"
         >
@@ -190,6 +179,7 @@ export default{
               message: error
             })
           })
+          .finally(() => this.is_loading = false)
       }
     },
     mounted() {
@@ -216,14 +206,13 @@ export default{
             "cover": "",
             "author": "",
             "press": "",
-            "subtitle": "",
             "date": "",
             "stock": "",
             "pages": "",
             "price": "",
             "isbn": "",
             "description": "",
-            "rating": ""
+            "score": ""
           },
         }
     }

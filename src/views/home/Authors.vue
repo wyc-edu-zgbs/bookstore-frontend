@@ -10,7 +10,9 @@
         v-for="(item,index) in this.menus"
         :key="index"
       >
-        <span> {{index+1}}. {{item}} </span>
+        <router-link :to="'/search?q='+item">
+          <span> {{index+1}}. {{item}} </span>
+        </router-link>
       </el-menu-item>
     </el-menu>
   </div>
@@ -29,6 +31,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
 .authors {
   border: 2px solid rgba(58, 130, 119, 0.7);
   margin: 8% 5% 0;

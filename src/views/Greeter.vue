@@ -4,6 +4,7 @@
       class="return"
       type="primary"
       icon="el-icon-top-right"
+      @click="$router.go(-1)"
     >
       返回
     </el-button>

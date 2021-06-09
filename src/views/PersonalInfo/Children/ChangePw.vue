@@ -91,7 +91,7 @@ export default {
             old_password: this.loginForm.oldpassword,
             new_password: this.loginForm.password
           }
-          this.$http.post('/user', data)
+          this.$http.post('/api/user', data)
             .then((response) => {
               if (response.data.detail) {
                 this.$message(response.data.detail)
