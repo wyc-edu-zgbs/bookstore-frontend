@@ -23,7 +23,6 @@ export default {
         { id: 0, idView: require('../assets/footer/0.png') },
         { id: 1, idView: require('../assets/footer/1.png') },
         { id: 2, idView: require('../assets/footer/2.png') },
-        { id: 3, idView: require('../assets/footer/3.png') },
       ],
     }
   },
@@ -35,11 +34,11 @@ export default {
   margin: 10% 0 5%;
 }
 #images {
-  padding: 1% 0 1% 20%;
+  padding: 1% 0 1% 25%;
   background: rgb(250, 250, 250);
 }
 .image {
-  padding: 0 5% 0 0;
+  padding: 0 10% 0 0;
 }
 p {
   font-size: 1px;

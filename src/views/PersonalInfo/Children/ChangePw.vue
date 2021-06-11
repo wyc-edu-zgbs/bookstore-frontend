@@ -1,45 +1,86 @@
 <template>
-  <el-card style="width:80%">
-    <div class="logo"><img
-         src="../../../assets/bread.png"
-         alt="bread"
-         class="img"
-         ></div>
-    <el-container>
-      <el-main class="main1">
-        <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="100px" class="login_form" style="margin-left:50px">
+  <div>
+    <el-header>
+      <span id="title">修改密码</span>
+    </el-header>
+    <el-card
+      style="width:80%"
+      shadow="never"
+    >
 
+      <el-container>
+        <el-main class="main1">
+          <el-form
+            ref="loginFormRef"
+            :model="loginForm"
+            :rules="loginFormRules"
+            label-width="100px"
+            class="login_form"
+            style="margin-left:50px"
+          >
 
-          <el-form-item label="原密码" prop="oldpassword" style="width:70%">
-            <el-input v-model="loginForm.oldpassword" prefix-icon="el-icon-lock"  type="password" placeholder="请输入原密码">
+            <el-form-item
+              label="原密码"
+              prop="oldpassword"
+              style="width:70%"
+            >
+              <el-input
+                v-model="loginForm.oldpassword"
+                prefix-icon="el-icon-lock"
+                type="password"
+                placeholder="请输入原密码"
+              >
 
-            </el-input>
+              </el-input>
 
-          </el-form-item>
+            </el-form-item>
 
-          <el-form-item label="新密码" prop="password" style="width:70%">
-            <el-input v-model="loginForm.password" prefix-icon="el-icon-lock"  type="password" placeholder="密码必须介于6-20个字符之间">
-            </el-input>
-          </el-form-item>
-          <el-form-item label="重复密码" prop="password2" style="width:70%">
-            <el-input v-model="loginForm.password2" prefix-icon="el-icon-lock"  type="password" placeholder="请重复密码">
-            </el-input>
-          </el-form-item>
+            <el-form-item
+              label="新密码"
+              prop="password"
+              style="width:70%"
+            >
+              <el-input
+                v-model="loginForm.password"
+                prefix-icon="el-icon-lock"
+                type="password"
+                placeholder="密码必须介于6-20个字符之间"
+              >
+              </el-input>
+            </el-form-item>
+            <el-form-item
+              label="重复密码"
+              prop="password2"
+              style="width:70%"
+            >
+              <el-input
+                v-model="loginForm.password2"
+                prefix-icon="el-icon-lock"
+                type="password"
+                placeholder="请重复密码"
+              >
+              </el-input>
+            </el-form-item>
 
-          <el-form-item class="btns" >
-            <el-button type="primary" @click="submitForm" style="width:300px">提交</el-button>
-          </el-form-item>
-        </el-form>
-      </el-main>
-    </el-container>
-  </el-card>
+            <el-form-item class="btns">
+              <el-button
+                type="primary"
+                @click="submitForm"
+                style="width:300px"
+              >提交</el-button>
+            </el-form-item>
+          </el-form>
+        </el-main>
+      </el-container>
+    </el-card>
+  </div>
 </template>
 
 <script>
 import QS from "qs"
 import Vue from 'vue';
 export default {
-  data(){
+  data() {
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
@@ -50,9 +91,9 @@ export default {
       }
     }
     return {
-      loginForm: 
+      loginForm:
       {
-        oldpassword:'',
+        oldpassword: '',
         password: '',
         password2: '',
       },
@@ -129,12 +170,14 @@ padding: 0 7% 0 0;
 background-color: rgba(248, 224, 157, 0.4);
 }
  */
-.logo {
-  position: relative;
-  margin: 2% 0 6% 38%;
+.el-header {
+  padding: 2%;
+  background-color: rgba(91, 155, 148, 0.3);
 }
-.img {
-  width: 30%;
+#title {
+  font-weight: bold;
+  font-size: 130%;
+  color: rgb(58, 130, 119);
 }
 .el-form-item {
   padding: 1%;
