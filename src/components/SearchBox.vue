@@ -5,7 +5,7 @@
       <el-col :span="5">
         <div class="logo"><img
             src="../assets/mylogo.png"
-            width="45%"
+            width="55%"
             class="img"
           ></div>
       </el-col>
@@ -77,8 +77,8 @@ export default {
 }
 
 .img {
-  margin-top: -18%;
-  margin-right: 55%;
+  margin-top: -17%;
+  margin-right: 20%;
 }
 .el-button {
   height: 45px;
