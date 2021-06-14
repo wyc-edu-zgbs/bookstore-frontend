@@ -1,10 +1,10 @@
 <template>
-  <div class="recd">
+  <div class="recd" v-loading="is_loading">
     <img
       src="../../assets/title/1.png"
       class="image"
     >
-    <el-row v-loading="is_loading">
+    <el-row>
       <el-col
         v-for="product in products_row[0]"
         :key="product.id"
@@ -83,62 +83,9 @@ export default {
     return {
       is_loading: true,
       "products_row": [
-        [{
-          "name": "寻找《局外人》",
-          "cover": "s33658199.jpg",
-          "author": "[美]爱丽丝·卡普兰 ",
-          "price": 98.0,
-          "id": "d99a716c-b952-11eb-8bfc-f1ff82be21dd",
-          "rating": 0.8
-        },
-        {
-          "name": "不要和你妈争辩",
-          "cover": "s33610259.jpg",
-          "author": "[瑞典] 弗雷德里克·巴克曼 ",
-          "price": 39.8,
-          "id": "d99a716d-b952-11eb-8bfc-f1ff82be21dd",
-          "rating": 0.8
-        },
-        {
-          "name": "鞋带",
-          "cover": "s33601424.jpg",
-          "author": "[意] 多梅尼科·斯塔尔诺内 ",
-          "price": 45,
-          "id": "d99a716e-b952-11eb-8bfc-f1ff82be21dd",
-          "rating": 0.8
-        },
-        {
-          "name": "正常人",
-          "cover": "s33684681.jpg",
-          "author": "[爱尔兰] 萨莉·鲁尼 ",
-          "price": 49.8,
-          "id": "d99a716f-b952-11eb-8bfc-f1ff82be21dd",
-          "rating": 0.8
-        },
-        {
-          "name": "正常人",
-          "cover": "s33684681.jpg",
-          "author": "[爱尔兰] 萨莉·鲁尼 ",
-          "price": 49.8,
-          "id": "f99a716f-b952-11eb-8bfc-f1ff82be21dd",
-          "rating": 0.8
-        }],
-        [{
-          "name": "光明共和国",
-          "cover": "s33625558.jpg",
-          "author": "[西]安德烈斯·巴尔瓦 ",
-          "price": 46,
-          "id": "d99a7170-b952-11eb-8bfc-f1ff82be21dd",
-          "rating": 0.8
-        }],
-        [{
-          "name": "往复书简：初恋与不伦",
-          "cover": "s33668217.jpg",
-          "author": "[日] 坂元裕二 ",
-          "price": 42.0,
-          "id": "d99a7171-b952-11eb-8bfc-f1ff82be21dd",
-          "rating": 0.8
-        }]
+        [],
+        [],
+        []
       ]
     }
   },
