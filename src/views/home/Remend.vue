@@ -4,7 +4,7 @@
       src="../../assets/title/1.png"
       class="image"
     >
-    <el-row>
+    <el-row v-loading="is_loading">
       <el-col
         v-for="product in products_row[0]"
         :key="product.id"
@@ -57,8 +57,31 @@
 import ProductItem from '../../components/ProductItem.vue'
 
 export default {
+  methods: {
+    show() {
+      var endpoint = "/api/search?q=" + (process.env.RECOMMEND_KEY || "1")
+      this.is_loading = true;
+      this.product_rows = []
+      this.$http.get(endpoint)
+        .then((response) => {
+          this.showProducts(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.is_loading = false)
+    },
+  },
+  mounted() {
+    this.show();
+  },
   data() {
     return {
+      is_loading: true,
       "products_row": [
         [{
           "name": "寻找《局外人》",

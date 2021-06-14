@@ -29,7 +29,7 @@
           </router-link>
           <router-link to="/cart" v-else><i class="el-icon-shopping-cart-2"></i>我的购物车</router-link>
         </li>
-        <li>
+        <li v-if="$route.path != '/'">
           <router-link to="/">返回首页</router-link>
         </li>
       </ul>
