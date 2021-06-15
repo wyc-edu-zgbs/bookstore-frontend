@@ -100,7 +100,7 @@
         <iframe
           class="comment"
           frameborder="0"
-          :src="'/comment/'+book.id"
+          :src="'/comment/comment/'+book.id"
           onload="javascript:(function(o){console.log('load');o.style.height=o.contentWindow.document.body.scrollHeight+'px';}(this));"
           ></iframe>
       </el-tab-pane>
