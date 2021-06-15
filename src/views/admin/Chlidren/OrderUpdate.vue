@@ -62,6 +62,15 @@
               </el-table-column>
 
             </el-table>
+
+            <el-divider></el-divider>
+
+            <div class="right-button">
+              <OrderButtonGroup
+                :id="scope.row.id"
+                :is_admin="true"
+                :state="scope.row.state" />
+            </div>
           </template>
         </el-table-column>
 
@@ -120,7 +129,8 @@
             <span v-if='scope.row.state == 0'>待确认</span>
             <span v-if='scope.row.state == 1'>未付款</span>
             <span v-if='scope.row.state == 2'>未发货</span>
-            <span v-if='scope.row.state == 3'>已完成</span>
+            <span v-if='scope.row.state == 3'>已发货</span>
+            <span v-if='scope.row.state == 4'>已确认</span>
             <span v-if='scope.row.state == 255'>已取消</span>
           </template>
 
@@ -133,52 +143,6 @@
           </template>
         </el-table-column>
 
-        <el-table-column
-          fixed="right"
-          width="50"
-        >
-
-          <template slot-scope="scope">
-            <el-tooltip
-              class="item"
-              effect="dark"
-              content="发货"
-              placement="bottom-end"
-            >
-              <el-button
-                @click.native="pushorder(scope.row.id)"
-                type="text"
-                style="color: #999"
-                size="medium"
-              >
-                <i class="el-icon-sell"></i>
-              </el-button>
-            </el-tooltip>
-          </template>
-        </el-table-column>
-        <el-table-column
-          fixed="right"
-          width="50"
-        >
-          <template slot-scope="scope">
-            <el-tooltip
-              class="item"
-              effect="dark"
-              content="删除"
-              placement="bottom-end"
-            >
-              <el-button
-                @click.native="delorder(scope.row.id)"
-                type="text"
-                style="color: #999"
-                size="medium"
-              >
-                <i class="el-icon-delete-solid"></i>
-              </el-button>
-            </el-tooltip>
-          </template>
-        </el-table-column>
-
       </el-table>
 
     </el-main>
@@ -186,7 +150,12 @@
   </el-container>
 </template>
 <script>
+import OrderButtonGroup from '../../../components/OrderButtonGroup.vue'
+
 export default {
+  components: {
+    OrderButtonGroup
+  },
   data() {
     return {
       is_loading: false,
@@ -213,51 +182,9 @@ export default {
           {
             "id": "001",
             "user": '00135',
-            "time": "2021-05-08 23:55",
+            "time": "",
             "state": "1",
             items: [
-              {
-                "count": 7,
-                "id": "ad727512-bd80-11eb-a8b8-c1e635d27859",
-                "name": "寻找《局外人》",
-                "cover": "s33658199.jpg",
-                "price": 98.0
-              },
-              {
-                "count": 9,
-                "id": "ad727513-bd80-11eb-a8b8-c1e635d27859",
-                "name": "不要和你妈争辩",
-                "cover": "s33610259.jpg",
-                "price": 39.8
-              },
-              {
-                "count": 5,
-                "id": "ad727514-bd80-11eb-a8b8-c1e635d27859",
-                "name": "鞋带",
-                "cover": "s33601424.jpg",
-                "price": 45
-              },
-              {
-                "count": 6,
-                "id": "ad727515-bd80-11eb-a8b8-c1e635d27859",
-                "name": "正常人",
-                "cover": "s33684681.jpg",
-                "price": 49.8
-              },
-              {
-                "count": 9,
-                "id": "ad727516-bd80-11eb-a8b8-c1e635d27859",
-                "name": "光明共和国",
-                "cover": "s33625558.jpg",
-                "price": 46
-              },
-              {
-                "count": 2,
-                "id": "ad727517-bd80-11eb-a8b8-c1e635d27859",
-                "name": "往复书简：初恋与不伦",
-                "cover": "s33668217.jpg",
-                "price": 42.0
-              }
             ]
           }
 
@@ -285,48 +212,6 @@ export default {
         })
         .finally(() => this.is_loading = false)
     },
-    pushorder(order_id) {
-      this.$confirm('确定此订单发货?', '订单发货', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'success'
-      }).then(() => {
-        this.submitpush(order_id);
-      });
-    },
-    delorder(order_id) {
-      this.$confirm('确定取消此订单?', '取消订单', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.submitdel(order_id);
-      });
-    },
-    submitdel(order_id) {
-      this.change_state(order_id, 3)
-    },
-    submitpush(order_id) {
-      this.change_state(order_id, 255)
-    },
-    selectnew() {
-
-    },
-    change_state(order_id, state) {
-      this.is_loading = true
-      this.$http.post("/api/order", {id: order_id, state: state})
-        .then((response) => {
-          this.$router.go()
-        })
-        .catch((error) => {
-          console.log(error)
-          this.$notify({
-            title: 'Could not reach the API.',
-            message: error
-          })
-        })
-        .finally(() => this.is_loading = false)
-    },
     goTo(path) {
       this.$router.replace(path);
     }
@@ -341,5 +226,8 @@ export default {
 }
 .el-col {
   border-radius: 4px;
+}
+.right-button {
+  text-align: right;
 }
 </style>

@@ -60,8 +60,16 @@
                   {{scope.row.price * scope.row.count | formatPrice}}
                 </template>
               </el-table-column>
-
             </el-table>
+
+            <el-divider></el-divider>
+
+            <div class="right-button">
+              <OrderButtonGroup
+                :id="scope.row.id"
+                :is_admin="false"
+                :state="scope.row.state" />
+            </div>
           </template>
         </el-table-column>
 
@@ -120,7 +128,8 @@
             <span v-if='scope.row.state == 0'>待确认</span>
             <span v-if='scope.row.state == 1'>未付款</span>
             <span v-if='scope.row.state == 2'>未发货</span>
-            <span v-if='scope.row.state == 3'>已完成</span>
+            <span v-if='scope.row.state == 3'>已发货</span>
+            <span v-if='scope.row.state == 4'>已确认</span>
             <span v-if='scope.row.state == 255'>已取消</span>
           </template>
 
@@ -139,7 +148,12 @@
   </el-container>
 </template>
 <script>
+import OrderButtonGroup from '../../../components/OrderButtonGroup.vue'
+
 export default {
+  components: {
+    OrderButtonGroup
+  },
   data() {
     return {
       is_loading: false,
@@ -167,54 +181,12 @@ export default {
             "time": "2021-05-08 23:55",
             "state": "1",
             items: [
-              {
-                "count": 7,
-                "id": "ad727512-bd80-11eb-a8b8-c1e635d27859",
-                "name": "寻找《局外人》",
-                "cover": "s33658199.jpg",
-                "price": 98.0
-              },
-              {
-                "count": 9,
-                "id": "ad727513-bd80-11eb-a8b8-c1e635d27859",
-                "name": "不要和你妈争辩",
-                "cover": "s33610259.jpg",
-                "price": 39.8
-              }
             ]
           },
           { "id": "002",
             "time": "2021-05-08 23:55",
             "state": "1",
             items: [
-              {
-                "count": 5,
-                "id": "ad727514-bd80-11eb-a8b8-c1e635d27859",
-                "name": "鞋带",
-                "cover": "s33601424.jpg",
-                "price": 45
-              },
-              {
-                "count": 6,
-                "id": "ad727515-bd80-11eb-a8b8-c1e635d27859",
-                "name": "正常人",
-                "cover": "s33684681.jpg",
-                "price": 49.8
-              },
-              {
-                "count": 9,
-                "id": "ad727516-bd80-11eb-a8b8-c1e635d27859",
-                "name": "光明共和国",
-                "cover": "s33625558.jpg",
-                "price": 46
-              },
-              {
-                "count": 2,
-                "id": "ad727517-bd80-11eb-a8b8-c1e635d27859",
-                "name": "往复书简：初恋与不伦",
-                "cover": "s33668217.jpg",
-                "price": 42.0
-              }
             ]
           }
         ]
@@ -251,5 +223,8 @@ export default {
 }
 .el-col {
   border-radius: 4px;
+}
+.right-button {
+  text-align: right;
 }
 </style>
