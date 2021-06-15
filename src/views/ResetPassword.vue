@@ -15,6 +15,29 @@
           class="img"
         ></div>
       <el-form
+        :model="emailform"
+        status-icon
+        :rules="emailrules"
+        ref="emailform"
+        label-width="120px"
+      >
+        <el-form-item
+          label="邮箱"
+          prop="email"
+        >
+          <el-input v-model="emailform.email"></el-input>
+        </el-form-item>
+        <el-form-item class="button-container">
+          <el-button
+            type="primary"
+            round
+            @click="send_token"
+          >
+          发送验证码
+          </el-button>
+        </el-form-item>
+      </el-form>
+      <el-form
         :model="form"
         status-icon
         :rules="rules"
@@ -22,20 +45,13 @@
         label-width="120px"
       >
         <el-form-item
-          label="邮箱"
-          prop="email"
-        >
-          <el-input v-model="form.email"></el-input>
-        </el-form-item>
-        <el-form-item
-          v-if="register"
-          label="昵称"
-          prop="nickname"
-          key="nick_item"
+          label="验证码"
+          prop="token"
+          key="token"
         >
           <el-input
-            v-model="form.nickname"
-            key="nickname"
+            v-model="form.token"
+            key="token"
           ></el-input>
         </el-form-item>
         <el-form-item
@@ -46,13 +62,12 @@
           <el-input
             type="password"
             v-model="form.pass"
-            :autocomplete="this.register?'new-password':'current-password'"
+            autocomplete="new-password"
             key="pass"
           >
           </el-input>
         </el-form-item>
         <el-form-item
-          v-if="register"
           label="确认密码"
           prop="checkPass"
         >
@@ -68,39 +83,7 @@
             round
             @click="submitForm()"
           >
-            <span v-if="this.register">注册</span>
-            <span v-else>登录</span>
-          </el-button>
-          <el-button
-            @click="resetForm()"
-            type="primary"
-            round
-          >重置</el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button
-            type="text"
-            @click="register = !register"
-          >
-            <div
-              v-if="register"
-              class="text-grey"
-            >返回登录</div>
-            <div
-              v-else
-              class="text-grey"
-            >
-              没有账号？点此注册
-            </div>
-          </el-button>
-          <el-divider direction="vertical"></el-divider>
-          <el-button
-            type="text"
-            @click="$router.push('/resetpassword')"
-          >
-            <div
-              class="text-grey"
-            >重置密码</div>
+          重置
           </el-button>
         </el-form-item>
       </el-form>
@@ -115,16 +98,13 @@ export default {
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
-        if (this.register && this.form.checkPass !== '') {
+        if (this.form.checkPass !== '') {
           this.$refs.form.validateField('checkPass')
         }
         callback()
       }
     }
     var validatePass2 = (rule, value, callback) => {
-      if (!this.register) {
-        callback()
-      }
       if (value === '') {
         callback(new Error('请再次输入密码'))
       } else if (value !== this.form.pass) {
@@ -134,17 +114,23 @@ export default {
       }
     }
     return {
-      register: false,
+      emailform: {
+        email: ''
+      },
       form: {
-        email: '',
-        nickname: '',
+        token: '',
         pass: '',
         checkPass: ''
       },
-      rules: {
+      emailrules: {
         email: [
           { required: true, message: "请输入邮箱" },
           { pattern: /.+@.+/, message: "您输入的邮箱不正确" },
+        ]
+      },
+      rules: {
+        token: [
+          { required: true, message: "请输入验证码" },
         ],
         pass: [
           { required: true, validator: validatePass, trigger: 'blur' }
@@ -159,13 +145,12 @@ export default {
     submitForm() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          var data = { email: this.form.email, password: this.form.pass }
-          if (this.register) {
-            data.username = this.form.nickname
+          var data = {
+            email: this.emailform.email,
+            token: this.form.token,
+            password: this.form.pass
           }
-          this.$http.post(
-            this.register ? "/api/register" : "/api/login",
-            data)
+          this.$http.post("/api/resetpassword", data)
             .then((response) => {
               if (response.data.detail) {
                 this.$message(response.data.detail)
@@ -183,8 +168,28 @@ export default {
         }
       })
     },
-    resetForm() {
-      this.$refs.form.resetFields()
+    send_token() {
+      this.$refs.emailform.validate((valid) => {
+        if (valid) {
+          var data = {
+            email: this.emailform.email,
+          }
+          this.$http.post("/api/sendreset", data)
+            .then((response) => {
+              if (response.data.detail) {
+                this.$message(response.data.detail)
+              }
+            })
+            .catch(error => {
+              this.$alert(
+                error.response.data.detail || error.toString(),
+                'Authentication Error')
+            })
+        } else {
+          this.$message("invalid input")
+          return false
+        }
+      })
     }
   }
 }
