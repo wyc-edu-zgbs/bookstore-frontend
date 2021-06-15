@@ -5,7 +5,7 @@
   >
     <SearchBox />
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{query: {cat: ''}}">homepage</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{query: {cat: ''}}">全部</el-breadcrumb-item>
       <el-breadcrumb-item
         v-for="i in p.map((v, i) => ({i:i, v:v}))"
         :key="i.v"

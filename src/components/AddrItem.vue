@@ -91,7 +91,7 @@ export default {
     updateaddr(e) {
       this.is_loading = true
       this.$http.post("/api/address", e)
-        .then(()=>this.$router.go())
+        .then(() => this.$router.go())
         .catch((error) => {
           console.log(error)
           this.$notify({
@@ -104,7 +104,7 @@ export default {
     remove() {
       this.is_loading = true
       this.$http.delete("/api/address/" + this.form.id)
-        .then(()=>this.$router.go())
+        .then(() => this.$router.go())
         .catch((error) => {
           console.log(error)
           this.$notify({
@@ -116,8 +116,8 @@ export default {
     },
     set_default() {
       this.is_loading = true
-      this.$http.post("/api/user", {default_address: this.form.id})
-        .then(()=>this.$router.go())
+      this.$http.post("/api/user", { default_address: this.form.id })
+        .then(() => this.$router.go())
         .catch((error) => {
           console.log(error)
           this.$notify({
@@ -140,6 +140,7 @@ export default {
   border-radius: 5%;
   border-width: 0.2vw;
   border-color: rgba(91, 155, 148, 0.3);
+  height: 20vh;
 }
 .addr-header {
   margin: -5% 0 2%;
@@ -160,7 +161,7 @@ export default {
   margin: 0;
 }
 .text-wrapper {
-  word-break: break-all;
-  word-wrap: break-word;
+  word-break: break-all !important;
+  word-wrap: break-word !important;
 }
 </style>

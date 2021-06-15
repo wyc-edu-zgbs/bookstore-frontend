@@ -6,23 +6,30 @@
     </h1>
     <!--   <el-container>-->
     <p>
-    请选择收货地址
+      <el-tag>请选择收货地址</el-tag>
     </p>
 
     <el-radio-group
       v-model="addr"
       v-if="addresses.addresses.length"
-      v-loading="addr_loading">
-      <el-radio
-        v-for="addr in addresses.addresses"
-        :key="addr.id"
-        :label="addr.id">
-        <AddrItem
-          :form="addr"
-          :isDefault="addr.id == addresses.default"
-          :editable="false"
-          ></AddrItem>
-      </el-radio>
+      v-loading="addr_loading"
+    >
+      <el-row>
+        <el-col
+          :span="6"
+          v-for="addr in addresses.addresses"
+          :key="addr.id"
+        >
+          <el-radio :label="addr.id">
+            <AddrItem
+              :form="addr"
+              :isDefault="addr.id == addresses.default"
+              :editable="false"
+            ></AddrItem>
+          </el-radio>
+        </el-col>
+
+      </el-row>
     </el-radio-group>
     <el-alert
       v-else
@@ -36,11 +43,10 @@
       </router-link>
     </el-alert>
     <!--  </el-container>-->
-    <el-header>
-      <span>
-        请核对商品
-      </span>
-    </el-header>
+    <el-header></el-header>
+    <p>
+      <el-tag>请核对商品</el-tag>
+    </p>
     <el-table
       stripe
       ref="table"
@@ -168,7 +174,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this)
     this.update()
   },
   data() {
@@ -206,7 +211,7 @@ export default {
   bottom: 0;
 }
 .check-button {
-  margin: 0 0 0 67%;
+  margin: 0 0 0 80%;
   padding: 1.5%;
   width: 10%;
   min-width: min-content;
@@ -223,5 +228,13 @@ export default {
   position: fixed;
   bottom: 0;
   z-index: 1500;
+}
+.el-radio {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.el-header {
+  height: 1vh !important;
 }
 </style>
