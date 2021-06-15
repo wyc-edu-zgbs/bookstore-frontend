@@ -24,6 +24,7 @@
       <el-button
         type="danger"
         size="mini"
+        v-if="$cookies.get('role')!='admin'"
         @click="add_to_cart"
         > <i class="el-icon-shopping-cart-2"></i> 加入购物车</el-button>
     </el-row>
