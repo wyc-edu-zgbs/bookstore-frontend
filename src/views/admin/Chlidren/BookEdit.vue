@@ -53,6 +53,17 @@
         >
         </el-input>
       </div>
+      <div class="goods-item">
+        <span>原价</span>
+        <el-input
+          type="number"
+          placeholder="请输入内容"
+          v-model="book.original_price"
+          clearable
+          style="width:100px"
+        >
+        </el-input>
+      </div>
             <div class="goods-item">
         <span>作者</span>
         <el-input
@@ -210,6 +221,7 @@ export default{
             "stock": "",
             "pages": "",
             "price": "",
+            "original_price": "",
             "isbn": "",
             "description": "",
             "score": ""
