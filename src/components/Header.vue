@@ -47,7 +47,12 @@ export default {
           if (response.data.detail) {
             this.$message(response.data.detail)
           }
-          this.$router.go()
+          if (this.$route.path.startsWith("/admin") || 
+            this.$route.path.startsWith("/personinfo")) {
+            this.$router.push("/")
+          } else {
+            this.$router.go()
+          }
         })
         .catch(error => {
           console.log(error)
