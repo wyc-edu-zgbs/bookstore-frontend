@@ -59,12 +59,18 @@ import ProductItem from '../../components/ProductItem.vue'
 export default {
   methods: {
     show() {
-      var endpoint = "/api/search?q=" + (process.env.RECOMMEND_KEY || "1")
+      var endpoint = "/api/search?count=12&q=" + (process.env.RECOMMEND_KEY || "1")
       this.is_loading = true;
       this.product_rows = []
       this.$http.get(endpoint)
         .then((response) => {
-          this.showProducts(response.data)
+          console.log(response.data)
+          var c = response.data.content
+          this.products_row = [
+            c.slice(0, 4),
+            c.slice(4, 8),
+            c.slice(8, 12)
+          ]
         })
         .catch((error) => {
           console.log(error)
