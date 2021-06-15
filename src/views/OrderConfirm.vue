@@ -43,6 +43,7 @@
       height="400"
       :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
       :row-style="{height: '40px'}"
+      class="it"
     >
       <!--这里不知道要不要把商品名单大小写死-->
       <el-table-column>
@@ -223,5 +224,9 @@ export default {
 }
 .el-header {
   height: 1vh !important;
+}
+
+.it >>> .el-table__body-wrapper {
+  height: 100% !important;
 }
 </style>
