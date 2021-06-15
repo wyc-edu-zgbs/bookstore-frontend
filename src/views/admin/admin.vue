@@ -1,5 +1,5 @@
 <template>
-  <el-container style="height: 100%;">
+  <el-container style="height: 100%; margin:5% 0">
     <el-aside style="width:250px">
       <!--
             <img v-if="userInfo.user_avatar" :src="userInfo.user_avatar" class="navbar-brand-img mx-auto">
@@ -22,6 +22,13 @@
         </h1>
       </el-header>
       <el-menu :unique-opened="true">
+        <el-menu-item
+          index="1"
+          @click="goTo('/admin/members')"
+        >
+          <i class="el-icon-user"></i>
+          <span slot="title">查询会员</span>
+        </el-menu-item>
         <el-menu-item
           index="2"
           @click="goTo('/admin/book')"

@@ -94,6 +94,10 @@ const routes = [
       {
         path:'orderupdate',
         component:()=>import('../views/admin/Chlidren/OrderUpdate.vue')
+      },
+      {
+        path:'members',
+        component:()=>import('../views/admin/Chlidren/Members.vue')
       }
     ]
 
