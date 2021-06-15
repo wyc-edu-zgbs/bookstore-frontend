@@ -31,7 +31,8 @@
           placeholder="请输入内容"
           v-model="book.isbn"
           clearable
-          style="width:100px"
+          style="width:200px"
+          :disabled="is_change"
         >
         </el-input>
       </div>
@@ -44,25 +45,31 @@
       </div>
       <div class="goods-item">
         <span>价格</span>
-        <el-input
+        <el-input-number
           type="number"
           placeholder="请输入内容"
           v-model="book.price"
+          :precision="2"
+          :min="0.01"
+          controls-position="right"
           clearable
-          style="width:100px"
+          style="width:200px"
         >
-        </el-input>
+        </el-input-number>
       </div>
       <div class="goods-item">
         <span>原价</span>
-        <el-input
+        <el-input-number
           type="number"
           placeholder="请输入内容"
           v-model="book.original_price"
+          :precision="2"
+          :min="0.01"
+          controls-position="right"
           clearable
-          style="width:100px"
+          style="width:200px"
         >
-        </el-input>
+        </el-input-number>
       </div>
             <div class="goods-item">
         <span>作者</span>
@@ -71,7 +78,7 @@
           placeholder="请输入内容"
           v-model="book.author"
           clearable
-          style="width:100px"
+          style="width:200px"
         >
         </el-input>
       </div>
@@ -82,7 +89,7 @@
           placeholder="请输入内容"
           v-model="book.press"
           clearable
-          style="width:100px"
+          style="width:200px"
         >
         </el-input>
       </div>
@@ -92,39 +99,47 @@
           type="text"
           v-model="book.date"
           clearable
-          style="width:100px"
+          style="width:200px"
         >
         </el-input>
       </div>
       <div class="goods-item">
         <span>页数</span>
-        <el-input
+        <el-input-number
           type="number"
           v-model="book.pages"
+          :min="0"
+          controls-position="right"
           clearable
-          style="width:100px"
+          style="width:200px"
         >
-        </el-input>
+        </el-input-number>
       </div>
       <div class="goods-item">
         <span>评分</span>
-        <el-input
+        <el-input-number
           type="number"
           v-model="book.score"
+          :precision="2"
+          :max="10"
+          :min="0"
+          controls-position="right"
           clearable
-          style="width:100px"
+          style="width:200px"
         >
-        </el-input>
+        </el-input-number>
       </div>
       <div class="goods-item">
         <span>库存</span>
-        <el-input
+        <el-input-number
           type="number"
           v-model="book.stock"
+          :min="0"
+          controls-position="right"
           clearable
-          style="width:100px"
+          style="width:200px"
         >
-        </el-input>
+        </el-input-number>
       </div>
       <div class="goods-item">
         <span>描述</span>
@@ -142,7 +157,10 @@
        <el-button type='plain' @click="change()" style='margin-right:0px;margin-top:50px;'>
            <span>保存信息
            </span>
-           </el-button>
+       </el-button>
+       <el-button type="danger" @click="delete_book" icon="el-icon-delete" v-if="is_change">
+         下架
+       </el-button>
       </div>
     </el-card>
 
@@ -162,6 +180,7 @@ export default{
         this.$http.get("/api/book/" + this.$route.params.id)
           .then((response) => {
             Object.assign(this.book, response.data)
+            this.book.category = this.book.category.split(/,/)
             this.key = this.$route.params.id
           })
           .catch((error) => {
@@ -177,11 +196,40 @@ export default{
         this.book.cover = response.id
       },
       change() {
+        if (!this.book.cover) {
+          this.$alert("请上传封面", "书籍封面")
+          return
+        }
         this.is_loading = true;
         (this.is_change ? this.$http.post : this.$http.put)("/api/book", this.book)
           .then((response) => {
-            this.$message("success")
+            this.$message("成功")
             this.$router.go()
+          })
+          .catch((error) => {
+            console.log(error)
+            this.$notify({
+              title: 'Could not reach the API.',
+              message: error
+            })
+          })
+          .finally(() => this.is_loading = false)
+      },
+      delete_book() {
+        this.$confirm('确定下架?', '下架书籍', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.submitdel();
+        });
+      },
+      submitdel() {
+        this.is_loading = true;
+        this.$http.delete("/api/book/" + this.$route.params.id)
+          .then((response) => {
+            this.$message("成功")
+            this.$router.push("/")
           })
           .catch((error) => {
             console.log(error)
