@@ -14,21 +14,33 @@
       label-width="25%"
       label-position="right"
     >
-      <el-form-item label="收货人：" prop="name">
+      <el-form-item
+        label="收货人："
+        prop="name"
+      >
         <el-input
           v-model="form.name"
           autocomplete="off"
           style="width:70%"
+          maxlength="10"
+          placeholder="请输入姓名，限10字以内"
         ></el-input>
       </el-form-item>
-      <el-form-item label="电话：" prop="tel">
+      <el-form-item
+        label="电话："
+        prop="tel"
+      >
         <el-input
           v-model="form.tel"
           autocomplete="off"
           style="width:70%"
+          maxlength="15"
         ></el-input>
       </el-form-item>
-      <el-form-item label="地址：" prop="adpca">
+      <el-form-item
+        label="地址："
+        prop="adpca"
+      >
         <el-cascader
           v-model="form.adpca"
           :options="pcaOptions"
@@ -38,11 +50,16 @@
           placeholder="请选择地址"
         ></el-cascader>
       </el-form-item>
-      <el-form-item label="详细地址：" prop="detail">
+      <el-form-item
+        label="详细地址："
+        prop="detail"
+      >
         <el-input
           v-model="form.detail"
           autocomplete="off"
-          style="width:70%"
+          style="width:80%"
+          maxlength="20"
+          placeholder="请输入姓名，限20字以内"
         ></el-input>
       </el-form-item>
     </el-form>
@@ -54,8 +71,8 @@
       <el-button
         type="primary"
         @click="updateaddr"
-        >
-      确定
+      >
+        确定
       </el-button>
     </div>
   </el-dialog>

@@ -6,24 +6,35 @@
     </h1>
     <!--   <el-container>-->
     <p>
-    请选择收货地址
+      <el-tag>请选择收货地址</el-tag>
     </p>
 
-    <el-radio-group v-model="addr" v-loading="addr_loading">
-      <el-radio v-for="addr in addresses.addresses" :key="addr.id" :label="addr.id">
-        <AddrItem
-          :form="addr"
-          :isDefault="addr.id == addresses.default"
-          :editable="false"
-          ></AddrItem>
-      </el-radio>
+    <el-radio-group
+      v-model="addr"
+      v-loading="addr_loading"
+    >
+      <el-row>
+        <el-col
+          :span="6"
+          v-for="addr in addresses.addresses"
+          :key="addr.id"
+        >
+          <el-radio :label="addr.id">
+            <AddrItem
+              :form="addr"
+              :isDefault="addr.id == addresses.default"
+              :editable="false"
+            ></AddrItem>
+          </el-radio>
+        </el-col>
+
+      </el-row>
     </el-radio-group>
     <!--  </el-container>-->
-    <el-header>
-      <span>
-        请核对商品
-      </span>
-    </el-header>
+    <el-header></el-header>
+    <p>
+      <el-tag>请核对商品</el-tag>
+    </p>
     <el-table
       stripe
       ref="table"
@@ -32,7 +43,7 @@
       height="400"
       :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
       :row-style="{height: '40px'}"
-      >
+    >
       <!--这里不知道要不要把商品名单大小写死-->
       <el-table-column>
         <template v-slot:default="scope">
@@ -42,19 +53,22 @@
             fit="contain"
             lazy
             style="width:60px;height:80px"
-            ></el-image>
+          ></el-image>
         </template>
       </el-table-column>
       <el-table-column
         prop="name"
         label="图书信息"
-        ></el-table-column>
+      ></el-table-column>
       <el-table-column label="单价">
         <template v-slot:default="scope">
           {{scope.row.price | formatPrice}}
         </template>
       </el-table-column>
-      <el-table-column label="数量" prop="count">
+      <el-table-column
+        label="数量"
+        prop="count"
+      >
       </el-table-column>
       <el-table-column label="合计">
         <template slot-scope="scope">
@@ -68,7 +82,7 @@
       <el-card
         shadow="always"
         class="card-foot"
-        >
+      >
         <span>
           共计:
           {{order.price | formatPrice}}
@@ -79,7 +93,7 @@
           type="text"
           plain
           @click="pay()"
-          >去支付</el-button>
+        >去支付</el-button>
       </el-card>
 
     </div>
@@ -134,7 +148,7 @@ export default {
       }
       this.$http.post("/api/order", data)
         .then((response) => {
-          this.$router.push("/pay/"+data.id)
+          this.$router.push("/pay/" + data.id)
         })
         .catch((error) => {
           console.log(error)
@@ -160,7 +174,7 @@ export default {
       addr: "",
       order: {
         price: 0.0,
-        items: [ ]
+        items: []
       }
     }
   }
@@ -184,7 +198,7 @@ export default {
   bottom: 0;
 }
 .check-button {
-  margin: 0 0 0 67%;
+  margin: 0 0 0 80%;
   padding: 1.5%;
   width: 10%;
   min-width: min-content;
@@ -201,5 +215,13 @@ export default {
   position: fixed;
   bottom: 0;
   z-index: 1500;
+}
+.el-radio {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.el-header {
+  height: 1vh !important;
 }
 </style>
