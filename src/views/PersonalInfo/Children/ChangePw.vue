@@ -44,7 +44,7 @@
                 v-model="loginForm.password"
                 prefix-icon="el-icon-lock"
                 type="password"
-                placeholder="密码必须介于6-20个字符之间"
+                placeholder="请输入新密码"
               >
               </el-input>
             </el-form-item>
@@ -109,12 +109,6 @@ export default {
           {
             required: true,
             message: "密码不能为空",
-            trigger: "blur"
-          },
-          {
-            min: 6,
-            max: 20,
-            message: "密码必须介于6-20个字符之间",
             trigger: "blur"
           }
         ],
