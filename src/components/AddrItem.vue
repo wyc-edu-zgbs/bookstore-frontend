@@ -96,7 +96,7 @@ export default {
           console.log(error)
           this.$notify({
             title: 'Could not reach the API.',
-            message: error
+            message: error.response.data.detail || error.toString()
           })
         })
         .finally(() => this.is_loading = false);
@@ -109,7 +109,7 @@ export default {
           console.log(error)
           this.$notify({
             title: 'Could not reach the API.',
-            message: error
+            message: error.response.data.detail || error.toString()
           })
         })
         .finally(() => this.is_loading = false);
@@ -122,7 +122,7 @@ export default {
           console.log(error)
           this.$notify({
             title: 'Could not reach the API.',
-            message: error
+            message: error.response.data.detail || error.toString()
           })
         })
         .finally(() => this.is_loading = false);

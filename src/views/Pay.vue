@@ -20,14 +20,14 @@ export default {
 			}
 			this.$http.post("/api/order", data)
 				.then((response) => {
-					this.$message("pay success")
+					this.$message(response.data.detail || "pay success")
 					this.$router.push("/cart")
 				})
 				.catch((error) => {
 					console.log(error)
 					this.$notify({
 						title: 'Could not reach the API.',
-						message: error
+						message: error.response.data.detail || error.toString()
 					})
 				})
 				.finally(() => this.is_loading = false)

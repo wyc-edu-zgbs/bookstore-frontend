@@ -44,13 +44,13 @@ export default {
     add_to_cart() {
       this.$http.put("/api/cart", {id: this.product.id, count: 1})
         .then((response) => {
-          this.$message("add success")
+          this.$message("添加成功")
         })
         .catch((error) => {
           console.log(error)
           this.$notify({
             title: 'Could not reach the API.',
-            message: error
+            message: error.response.data.detail || error.toString()
           })
         })
         .finally(() => this.update())
