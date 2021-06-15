@@ -19,10 +19,12 @@
       </el-carousel-item>
     </el-carousel>
     <el-divider id="divi"></el-divider>
-    <img
-      src="../../assets/adver.jpg"
-      class="ad"
-    >
+    <router-link to="/search?q=618%E4%BA%94%E6%8A%98%E6%8A%A2%E8%B4%AD">
+      <img
+        src="../../assets/adver.jpg"
+        class="ad"
+      >
+    </router-link>
   </div>
 </template>
 
