@@ -140,7 +140,7 @@ export default {
   border-radius: 5%;
   border-width: 0.2vw;
   border-color: rgba(91, 155, 148, 0.3);
-  height: 20vh;
+  max-height: min-content;
 }
 .addr-header {
   margin: -5% 0 2%;

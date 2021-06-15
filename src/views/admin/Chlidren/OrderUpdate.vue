@@ -65,6 +65,14 @@
 
             <el-divider></el-divider>
 
+            <AddrItem
+              class="addr"
+              v-if="scope.row.address"
+              :editable="false"
+              :form="scope.row.address" />
+
+            <el-divider></el-divider>
+
             <div class="right-button">
               <OrderButtonGroup
                 :id="scope.row.id"
@@ -118,6 +126,10 @@
           </template>
         </el-table-column>
         <el-table-column
+          prop="user"
+          label="用户"
+        ></el-table-column>
+        <el-table-column
           prop="time"
           label="下单时间"
         ></el-table-column>
@@ -151,13 +163,22 @@
 </template>
 <script>
 import OrderButtonGroup from '../../../components/OrderButtonGroup.vue'
+import AddrItem from '../../../components/AddrItem.vue'
 
 export default {
   components: {
-    OrderButtonGroup
+    OrderButtonGroup,
+    AddrItem
   },
   data() {
     return {
+      addr: {
+        name: '张三',
+        region: '北京市海淀区',
+        detail: "北京航空航天大学",
+        tel: "12345678910",
+        adpca: ["11", "1101", "110108"],
+      },
       is_loading: false,
       pending_only: false,
       key: "",
@@ -219,6 +240,13 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.addr {
+  width: max-content;
+  margin: auto;
+}
+</style>
 
 <style >
 .el-row {
