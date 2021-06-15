@@ -9,8 +9,14 @@
     请选择收货地址
     </p>
 
-    <el-radio-group v-model="addr" v-loading="addr_loading">
-      <el-radio v-for="addr in addresses.addresses" :key="addr.id" :label="addr.id">
+    <el-radio-group
+      v-model="addr"
+      v-if="addresses.addresses.length"
+      v-loading="addr_loading">
+      <el-radio
+        v-for="addr in addresses.addresses"
+        :key="addr.id"
+        :label="addr.id">
         <AddrItem
           :form="addr"
           :isDefault="addr.id == addresses.default"
@@ -18,6 +24,17 @@
           ></AddrItem>
       </el-radio>
     </el-radio-group>
+    <el-alert
+      v-else
+      title="收货地址为空"
+      :closable="false"
+      type="warning"
+      show-icon>
+      请
+      <router-link to="/personinfo/addr">
+        添加收货地址
+      </router-link>
+    </el-alert>
     <!--  </el-container>-->
     <el-header>
       <span>
@@ -79,6 +96,7 @@
           type="text"
           plain
           @click="pay()"
+          :disabled="addr == ''"
           >去支付</el-button>
       </el-card>
 
@@ -115,6 +133,9 @@ export default {
       this.$http.get("/api/address")
         .then((response) => {
           this.addresses = response.data
+          if (response.data.default) {
+            this.addr = response.data.default
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -147,6 +168,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this)
     this.update()
   },
   data() {
