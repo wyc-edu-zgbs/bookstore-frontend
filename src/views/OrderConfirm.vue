@@ -55,7 +55,8 @@
       height="400"
       :header-cell-style="{background:'rgba(58, 130, 119,0.7)',color:'white'}"
       :row-style="{height: '40px'}"
-      >
+      class="it"
+    >
       <!--这里不知道要不要把商品名单大小写死-->
       <el-table-column>
         <template v-slot:default="scope">
@@ -65,19 +66,22 @@
             fit="contain"
             lazy
             style="width:60px;height:80px"
-            ></el-image>
+          ></el-image>
         </template>
       </el-table-column>
       <el-table-column
         prop="name"
         label="图书信息"
-        ></el-table-column>
+      ></el-table-column>
       <el-table-column label="单价">
         <template v-slot:default="scope">
           {{scope.row.price | formatPrice}}
         </template>
       </el-table-column>
-      <el-table-column label="数量" prop="count">
+      <el-table-column
+        label="数量"
+        prop="count"
+      >
       </el-table-column>
       <el-table-column label="合计">
         <template slot-scope="scope">
@@ -91,7 +95,7 @@
       <el-card
         shadow="always"
         class="card-foot"
-        >
+      >
         <span>
           共计:
           {{order.price | formatPrice}}
@@ -161,7 +165,7 @@ export default {
       }
       this.$http.post("/api/order", data)
         .then((response) => {
-          this.$router.push("/pay/"+data.id)
+          this.$router.push("/pay/" + data.id)
         })
         .catch((error) => {
           console.log(error)
@@ -187,7 +191,7 @@ export default {
       addr: "",
       order: {
         price: 0.0,
-        items: [ ]
+        items: []
       }
     }
   }
@@ -236,5 +240,9 @@ export default {
 }
 .el-header {
   height: 1vh !important;
+}
+
+.it >>> .el-table__body-wrapper {
+  height: 100% !important;
 }
 </style>
