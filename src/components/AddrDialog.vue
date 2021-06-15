@@ -94,16 +94,16 @@ export default {
       form: this.deepcopy(this.addr),
       rules: {
         name: [
-          { required: true, message: "blabla required" },
+          { required: true, message: "请输入姓名" },
         ],
         tel: [
-          { required: true, message: "blabla required" },
+          { required: true, message: "请输入电话" },
         ],
         adpca: [
-          { required: true, message: "blabla required" },
+          { required: true, message: "请选择地址" },
         ],
         detail: [
-          { required: true, message: "blabla required" },
+          { required: true, message: "请输入详细地址" },
         ]
       }
     }
