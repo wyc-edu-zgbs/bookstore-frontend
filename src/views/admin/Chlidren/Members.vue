@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="is_loading">
 
     <el-main>
 
@@ -7,7 +7,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item>
-              <el-input placeholder="在此输入" />
+              <el-input v-model="q" placeholder="在此输入" />
             </el-form-item>
           </el-col>
           <el-col
@@ -18,6 +18,7 @@
               <el-button
                 type="primary"
                 icon="el-icon-search"
+                @click="update"
               >
                 搜索
               </el-button>
@@ -31,6 +32,7 @@
               <el-button
                 type="primary"
                 plain
+                @click="q=''; update()"
               >
                 查看全部会员
               </el-button>
@@ -51,7 +53,7 @@
         >
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="nickname"
           label="昵称"
         >
         </el-table-column>
@@ -65,10 +67,29 @@
 export default {
   data() {
     return {
-      tableData: [{
-        email: '123456@qq.com',
-        name: 'zhangsan',
-      },]
+      is_loading: false,
+      q: "",
+      tableData: []
+    }
+  },
+  mounted() {
+    this.update()
+  },
+  methods: {
+    update() {
+      this.is_loading = true
+      this.$http.get("/api/users?q=" + this.q)
+        .then((response) => {
+          this.tableData = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$notify({
+            title: 'Could not reach the API.',
+            message: error
+          })
+        })
+        .finally(() => this.is_loading = false)
     }
   }
 }
