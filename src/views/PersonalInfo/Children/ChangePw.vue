@@ -4,7 +4,6 @@
       <span id="title">修改密码</span>
     </el-header>
     <el-card
-      style="width:80%"
       shadow="never"
     >
 

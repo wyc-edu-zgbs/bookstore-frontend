@@ -22,18 +22,18 @@
 			发货
 		</el-button>
 		<el-button
+			v-if="!is_admin && state == 3"
+			type="primary"
+			@click="complete"
+			icon="el-icon-check">
+			确认收货
+		</el-button>
+		<el-button
 			v-if="state != 255"
 			type="primary"
 			@click="ordercancel"
 			icon="el-icon-close">
 			取消
-		</el-button>
-		<el-button
-			v-if="state == 3"
-			type="primary"
-			@click="complete"
-			icon="el-icon-check">
-			确认收货
 		</el-button>
 	</el-button-group>
 </template>

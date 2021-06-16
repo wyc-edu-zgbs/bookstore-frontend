@@ -46,9 +46,11 @@
               >
               </el-table-column>
               <el-table-column
-                prop='price'
                 label="价格"
               >
+                <template slot-scope="scope">
+                  {{scope.row.price | formatPrice}}
+                </template>
               </el-table-column>
               <el-table-column
                 prop="count"

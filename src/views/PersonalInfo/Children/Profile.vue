@@ -17,7 +17,8 @@
           style="margin-right: 20px"
           fit="contain"
         ></el-avatar>
-        <i class="bigpic el-icon-user-solid" v-else></i>
+        <el-avatar :size="150" class="bigpic" icon="el-icon-user-solid" v-else>
+        </el-avatar>
         <!-- TODO -->
         <el-upload
           class="changepic"

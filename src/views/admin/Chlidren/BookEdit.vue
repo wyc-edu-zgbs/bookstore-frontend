@@ -204,7 +204,11 @@ export default{
         (this.is_change ? this.$http.post : this.$http.put)("/api/book", this.book)
           .then((response) => {
             this.$message("成功")
-            this.$router.go()
+            if (this.is_change) {
+              this.$router.push("/book/" + this.book.id)
+            } else {
+              this.$router.go()
+            }
           })
           .catch((error) => {
             console.log(error)
