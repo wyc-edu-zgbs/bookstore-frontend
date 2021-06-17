@@ -176,6 +176,7 @@ export default {
           }
           this.$http.post("/api/sendreset", data)
             .then((response) => {
+              console.log(response)
               if (response.data.detail) {
                 this.$message(response.data.detail)
               }

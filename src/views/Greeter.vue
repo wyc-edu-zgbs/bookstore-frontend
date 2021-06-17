@@ -133,6 +133,16 @@ export default {
         callback()
       }
     }
+    var validateNick = (rule, value, callback) => {
+      if (!this.register) {
+        callback()
+      }
+      if (value === '') {
+        callback(new Error('请输入昵称'))
+      } else {
+        callback()
+      }
+    }
     return {
       register: false,
       form: {
@@ -145,6 +155,9 @@ export default {
         email: [
           { required: true, message: "请输入邮箱" },
           { pattern: /.+@.+/, message: "您输入的邮箱不正确" },
+        ],
+        nickname: [
+          { required: true, validator: validateNick, trigger: 'blur' }
         ],
         pass: [
           { required: true, validator: validatePass, trigger: 'blur' }

@@ -182,7 +182,7 @@ export default {
         adpca: ["11", "1101", "110108"],
       },
       is_loading: false,
-      pending_only: false,
+      pending_only: true,
       key: "",
       options:
         [
